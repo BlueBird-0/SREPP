@@ -12,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 
-public class Main extends Application {
+public class MainProgramManager extends Application {
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	
@@ -23,19 +23,23 @@ public class Main extends Application {
 			
 		initRootLayout();
 		showPersonOverView();
+		
+		//이후에 동작 실행
+		ComputeManager.pressCompute();
+
 	}
 	
 	public void initRootLayout() {
 		try {
 			// fxml 파일에서 상위 레이아웃을 가져온다.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/view/RootLayout.fxml"));
+			loader.setLocation(MainProgramManager.class.getResource("/view/RootLayout.fxml"));
 			rootLayout = (BorderPane)loader.load();
 			
 			// 상위 레이아웃을 포함하는 scene 을 보여준다.
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
-			primaryStage.show();
+			primaryStage.show(); 
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +51,7 @@ public class Main extends Application {
 	public void showPersonOverView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(Main.class.getResource("/view/PersonOverview.fxml"));
+			loader.setLocation(MainProgramManager.class.getResource("/view/PersonOverview.fxml"));
 			AnchorPane personOverview = (AnchorPane)loader.load();
 			rootLayout.setCenter(personOverview);
 		}catch(IOException e) {

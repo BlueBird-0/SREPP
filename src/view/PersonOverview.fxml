@@ -8,53 +8,100 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.Controller">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <children>
-      <SplitPane dividerPositions="0.401386748844376" layoutY="25.0" prefHeight="700.0" prefWidth="1300.0">
+      <SplitPane dividerPositions="0.35208012326656396" layoutY="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField layoutX="20.0" layoutY="154.0" AnchorPane.bottomAnchor="520.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="154.0" />
-                  <GridPane layoutX="76.0" layoutY="132.0" prefHeight="500.0" prefWidth="300.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" />
-                     </children>
-                  </GridPane>
+                  <TableView fx:id="parameterTableView" layoutX="20.0" layoutY="118.0" prefHeight="552.0" prefWidth="414.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                    <columns>
+                      <TableColumn fx:id="keyColumn" prefWidth="75.0" text="변수" />
+                      <TableColumn fx:id="valueColumn" prefWidth="75.0" text="값" />
+                        <TableColumn fx:id="commentColumn" text="설명" />
+                    </columns>
+                  </TableView>
+                  <CheckBox layoutX="365.0" layoutY="89.0" mnemonicParsing="false" text="전체보기" AnchorPane.bottomAnchor="593.0" AnchorPane.rightAnchor="20.0" />
+                  <TextField layoutX="20.0" layoutY="48.0" text="search" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="48.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="660.0" prefWidth="457.0">
                <children>
-                  <TabPane layoutX="24.0" layoutY="98.0" prefHeight="540.0" prefWidth="729.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <TabPane layoutX="24.0" layoutY="98.0" prefHeight="582.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                     <tabs>
                       <Tab text="page1">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="resultTableView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+	                                      <columns>
+	                                        <TableColumn prefWidth="75.0" text="각도">
+	                                             <columns>
+	                                                <TableColumn fx:id="result01Column" prefWidth="75.0" text="R-degree" />
+	                                             </columns></TableColumn>
+	                                        <TableColumn prefWidth="75.0" text="압축기">
+	                                             <columns>
+	                                                <TableColumn fx:id="result02Column" prefWidth="75.0" text="v_c" />
+	                                                <TableColumn fx:id="result03Column" prefWidth="75.0" text="volcomex" />
+	                                                <TableColumn fx:id="result04Column" prefWidth="75.0" text="γ_air" />
+	                                                <TableColumn fx:id="result05Column" prefWidth="83.0" text="p_c(N/cm^2)" />
+	                                                <TableColumn fx:id="result06Column" prefWidth="67.0" text="t_c, (C )" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="팽창기">
+	                                             <columns>
+	                                                <TableColumn fx:id="result07Column" prefWidth="75.0" text="v_e" />
+	                                                <TableColumn fx:id="result08Column" prefWidth="62.0" text="γ_gas" />
+	                                                <TableColumn fx:id="result09Column" prefWidth="88.0" text="p_e(N/cm^2)" />
+	                                                <TableColumn fx:id="result10Column" prefWidth="75.0" text="t_e (C )" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="시간">
+	                                             <columns>
+	                                                <TableColumn fx:id="result11Column" prefWidth="75.0" text="t" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="Roter 운동">
+	                                             <columns>
+	                                                <TableColumn fx:id="result12Column" prefWidth="75.0" text="α" />
+	                                                <TableColumn fx:id="result13Column" prefWidth="75.0" text="ω" />
+	                                                <TableColumn fx:id="result14Column" prefWidth="75.0" text="a(rad)" />
+	                                                <TableColumn fx:id="result15Column" prefWidth="75.0" text="a(degree)" />
+	                                                <TableColumn fx:id="result16Column" prefWidth="75.0" text="rpm" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="출력">
+	                                             <columns>
+	                                                <TableColumn fx:id="result17Column" prefWidth="75.0" text="ps" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="시간">
+	                                             <columns>
+	                                                <TableColumn fx:id="result18Column" prefWidth="75.0" text="t" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="Rotor 운동(펌프일, 마찰력 반영)">
+	                                             <columns>
+	                                                <TableColumn fx:id="result19Column" prefWidth="75.0" text="α" />
+	                                                <TableColumn fx:id="result20Column" prefWidth="75.0" text="ω" />
+	                                                <TableColumn fx:id="result21Column" prefWidth="75.0" text="a(rad)" />
+	                                                <TableColumn fx:id="result22Column" prefWidth="75.0" text="a(degree)" />
+	                                                <TableColumn fx:id="result23Column" prefWidth="75.0" text="rpm" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="출력">
+	                                             <columns>
+	                                                <TableColumn fx:id="result24Column" prefWidth="75.0" text="ps" />
+	                                             </columns></TableColumn>
+	                                          <TableColumn prefWidth="75.0" text="그래프 check">
+	                                             <columns>
+	                                                <TableColumn fx:id="result25Column" prefWidth="75.0" text="각도" />
+	                                                <TableColumn fx:id="result26Column" prefWidth="75.0" text="v_c" />
+	                                                <TableColumn fx:id="result27Column" prefWidth="75.0" text="V_e" />
+	                                                <TableColumn fx:id="result28Column" prefWidth="75.0" text="P_Pst_c" />
+	                                                <TableColumn fx:id="result29Column" prefWidth="75.0" text="P_Pst_e" />
+	                                                <TableColumn fx:id="result30Column" prefWidth="75.0" text="P_SRE_c" />
+	                                                <TableColumn fx:id="result31Column" prefWidth="75.0" text="P_SRE_e" />
+	                                             </columns></TableColumn>
+	                                      </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                       <Tab text="page2">
@@ -62,14 +109,18 @@
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                       </Tab>
+                        <Tab text="page3">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                           </content>
+                        </Tab>
                     </tabs>
                   </TabPane>
-                  <Button layoutX="634.0" layoutY="58.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="119.0" text="Graph" />
-                  <Button layoutX="579.0" layoutY="58.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="699.0" layoutY="14.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="119.0" text="Graph" AnchorPane.rightAnchor="20.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>
-      <MenuBar prefHeight="25.0" prefWidth="1300.0">
+      <MenuBar maxHeight="25.0" prefWidth="1300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
