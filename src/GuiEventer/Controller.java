@@ -1,24 +1,18 @@
 package GuiEventer;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 import DataManager.Data;
 import DataManager.DataManager;
 import DataManager.ResultData;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
+import application.ComputeManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import application.*;
 
 public class Controller implements Initializable {
 	
@@ -70,16 +64,11 @@ public class Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		DataManager.initData();
-		for(int i=0; i<700;i++)
-		{
 		ComputeManager.resultCompute();
-		}
-		System.out.println(DataManager.dataList.get(0).key);
 		
 		keyColumn.setCellValueFactory(cellData -> cellData.getValue().getKey());
 		valueColumn.setCellValueFactory(cellData -> cellData.getValue().getValue().asObject());
-		commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
-		
+		commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());		
 
 		TableColumn<ResultData, Double> resultColumnList[] = new TableColumn[] {
 				result01Column,result02Column,result03Column,result04Column,result05Column,result06Column,result07Column,result08Column,result09Column,result10Column,
@@ -99,7 +88,7 @@ public class Controller implements Initializable {
 		}
 		for(ResultData data : DataManager.resultDataList)
 		{
-			oResultDataList.add(new ResultData());
+			oResultDataList.add(data);
 		}
 		
 		parameterTableView.setItems(oDataList);
