@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Data {
+	public static int STATE_NOTCHANGE = 0;
+	public static int STATE_CHANGEABLE = 1;
 	public int state; // 0.not change  1.changeable, 
 	public StringProperty key;
 	public DoubleProperty value;
@@ -13,7 +15,7 @@ public class Data {
 	
 	public Data(String key, double value, String comment)
 	{
-		this.state = 0;
+		this.state = STATE_NOTCHANGE;
 		this.key = new SimpleStringProperty(key);
 		this.value = new SimpleDoubleProperty(value);
 		this.comment = new SimpleStringProperty(comment);
@@ -27,7 +29,7 @@ public class Data {
 	}
 	public Data(StringProperty key, DoubleProperty value, StringProperty comment)
 	{
-		this.state = 0;
+		this.state = STATE_NOTCHANGE;
 		this.key = key;
 		this.value = value;
 		this.comment = comment;

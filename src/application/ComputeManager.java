@@ -29,9 +29,7 @@ public class ComputeManager {
 		//=(rhousing^2-rrotore^2)*3.14159*drotore*voleff
 		DataManager.setData("V_4m2", (Math.pow(DataManager.g("rhousing"),2)-Math.pow(DataManager.g("rrotore"),2))*Math.PI*DataManager.g("drotore")*DataManager.g("voleff"));
 		//= V_2*ER
-		DataManager.setData("V_4", DataManager.g("V_2")*DataManager.g("ER"));
-		
-		System.out.println( DataManager.getData("Irotor").value);
+		DataManager.setData("V_4", DataManager.g("V_2")*DataManager.g("ER"));		
 	}
 	public static void pressCompute()
 	{

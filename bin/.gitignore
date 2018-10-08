@@ -1,3 +1,6 @@
 /application/
 /GuiEventer/
 /DataManager/
+/view/
+/FileSystem/
+/LogManager/

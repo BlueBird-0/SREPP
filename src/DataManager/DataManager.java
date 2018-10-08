@@ -1,7 +1,6 @@
 package DataManager;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -59,6 +58,10 @@ public class DataManager {
 	}
 	
 	
+	public static ArrayList<Data> getAllList()
+	{
+		return dataList;
+	}
 	public static ArrayList<Data> getChangeableList()
 	{
 		ArrayList<Data> changeableList = new ArrayList<>();

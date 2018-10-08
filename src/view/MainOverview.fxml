@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
@@ -17,20 +18,20 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="parameterTableView" layoutX="20.0" layoutY="118.0" prefHeight="552.0" prefWidth="414.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <TableView fx:id="parameterTableView" layoutX="20.0" layoutY="118.0" prefHeight="552.0" prefWidth="414.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                     <columns>
                       <TableColumn fx:id="keyColumn" prefWidth="75.0" text="변수" />
                       <TableColumn fx:id="valueColumn" prefWidth="75.0" text="값" />
                         <TableColumn fx:id="commentColumn" text="설명" />
                     </columns>
                   </TableView>
-                  <CheckBox layoutX="365.0" layoutY="89.0" mnemonicParsing="false" text="전체보기" AnchorPane.bottomAnchor="593.0" AnchorPane.rightAnchor="20.0" />
-                  <TextField layoutX="20.0" layoutY="48.0" text="search" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="48.0" />
+                  <CheckBox layoutX="365.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleBtnAll" text="전체보기" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+                  <TextField layoutX="20.0" layoutY="48.0" text="search" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="660.0" prefWidth="457.0">
                <children>
-                  <TabPane layoutX="24.0" layoutY="98.0" prefHeight="582.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                  <TabPane layoutX="24.0" layoutY="98.0" prefHeight="582.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                     <tabs>
                       <Tab text="page1">
                         <content>
@@ -116,7 +117,7 @@
                         </Tab>
                     </tabs>
                   </TabPane>
-                  <Button layoutX="699.0" layoutY="14.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="119.0" text="Graph" AnchorPane.rightAnchor="20.0" />
+                  <Button layoutX="699.0" layoutY="14.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="119.0" text="Graph" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>

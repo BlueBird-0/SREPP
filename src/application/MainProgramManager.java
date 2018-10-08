@@ -48,7 +48,7 @@ public class MainProgramManager extends Application {
 	public void showPersonOverView() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainProgramManager.class.getResource("/view/PersonOverview.fxml"));
+			loader.setLocation(MainProgramManager.class.getResource("/view/MainOverview.fxml"));
 			AnchorPane personOverview = (AnchorPane)loader.load();
 			rootLayout.setCenter(personOverview);
 		}catch(IOException e) {
