@@ -140,5 +140,10 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Text fx:id="calculatingNotice" fill="RED" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Calculating..." textAlignment="CENTER" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="7.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -25,7 +25,6 @@ public class MainProgramManager extends Application {
 		ComputeManager.pressCompute();
 
 	}
-	
 	public void initRootLayout() {
 		try {
 			// fxml 파일에서 상위 레이아웃을 가져온다.

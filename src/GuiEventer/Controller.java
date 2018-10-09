@@ -10,6 +10,7 @@ import DataManager.ResultData;
 import FileSystem.FileSystem;
 import application.ComputeManager;
 import application.MainProgramManager;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -67,6 +69,8 @@ public class Controller implements Initializable {
 	@FXML	private TableColumn<ResultData, Double> result30Column;
 	@FXML	private TableColumn<ResultData, Double> result31Column;
 	
+	@FXML	public Text calculatingNotice;
+	
 	ObservableList<Data> oDataList = FXCollections.observableArrayList();
 	ObservableList<ResultData> oResultDataList = FXCollections.observableArrayList();
 
@@ -91,13 +95,9 @@ public class Controller implements Initializable {
 		
 		parameterTableView.setRowFactory(tv->{
 			TableRow<Data> row = new TableRow<>();
-			Data data = row.getItem();
-
-			if(data.state == Data.STATE_CHANGEABLE)
-			{
 				row.setOnMouseClicked(event ->{
 					if(event.getClickCount() == 2 && (!row.isEmpty())) {
-						//Data data = row.getItem();
+						Data data = row.getItem();
 						System.out.println(data.key + data.value.toString() + data.comment);
 						//ÆË¾÷Ã¢ ½ÇÇà
 						final Stage dialog = new Stage();
@@ -125,8 +125,6 @@ public class Controller implements Initializable {
 						});
 					}
 				});
-			}
-			
 			return row;
 		});
 		
@@ -143,9 +141,9 @@ public class Controller implements Initializable {
 		for (ResultData data : DataManager.resultDataList) {
 			oResultDataList.add(data);
 		}
-
 		parameterTableView.setItems(oDataList);
 		resultTableView.setItems(oResultDataList);
+		
 		onDraw();
 	}
 
@@ -174,6 +172,35 @@ public class Controller implements Initializable {
 			for(Data data : DataManager.getChangeableList())
 				oDataList.add(data);
 		
+		runComputeThread();
 	}
+	
 
+	public void runComputeThread()
+	{              
+	    Thread thread = new Thread() {
+	        @Override
+	        public void run() {
+	        	System.out.println("calculate thread run");
+	            while (ComputeManager.CalculatingStatus) {
+	                Platform.runLater(() -> {
+	                	if(calculatingNotice.getText().equals("Calculating.  "))
+	                	{
+	                		calculatingNotice.setText("Calculating.. ");
+	                	}else if(calculatingNotice.getText().equals("Calculating.. "))
+	                	{
+	                		calculatingNotice.setText("Calculating...");
+	                	}else if(calculatingNotice.getText().equals("Calculating..."))
+	                	{
+	                		calculatingNotice.setText("Calculating.  ");
+	                	}
+	                });
+	                try { Thread.sleep(700); } catch (InterruptedException e) {}
+	            }
+	            calculatingNotice.setVisible(false);
+	        }
+	    };
+	    thread.setDaemon(true);
+	    thread.start();
+	}
 }

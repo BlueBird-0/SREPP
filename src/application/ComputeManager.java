@@ -6,6 +6,7 @@ import DataManager.ResultData;
 public class ComputeManager {
 	public static void initCompute()
 	{
+		CalculatingStatus = true;
 		//= 0.5*(1.25*(rrotorc*1.2/100)^2 +1*(rrotore*1.2/100)^2)
 		DataManager.setData("Irotor", 0.5*( 1.25*Math.pow((DataManager.g("rrotorc")*1.2/100),2) +1*Math.pow((DataManager.g("rrotore")*1.2/100),2)));
 		//= (rrotorc+rhousing)/2/100
@@ -29,16 +30,22 @@ public class ComputeManager {
 		//=(rhousing^2-rrotore^2)*3.14159*drotore*voleff
 		DataManager.setData("V_4m2", (Math.pow(DataManager.g("rhousing"),2)-Math.pow(DataManager.g("rrotore"),2))*Math.PI*DataManager.g("drotore")*DataManager.g("voleff"));
 		//= V_2*ER
-		DataManager.setData("V_4", DataManager.g("V_2")*DataManager.g("ER"));		
+		DataManager.setData("V_4", DataManager.g("V_2")*DataManager.g("ER"));
+
+		CalculatingStatus = false;
 	}
 	public static void pressCompute()
 	{
+		CalculatingStatus = true;
 		//P_2 임의값 조정
-		
+
+		CalculatingStatus = false;
 	}
 	
 	public static void resultCompute()
 	{
+		CalculatingStatus = true;
+		System.out.println("계산시작 ");
 		//현재 계산하는 값		resultData
 		ResultData rData = new ResultData();
 
@@ -146,5 +153,11 @@ public class ComputeManager {
 			DataManager.resultDataList.add(rData);
 			pData = rData;
 		}
+
+		CalculatingStatus = false;
+		System.out.println("계산끝 ");
 	}
+	
+	public static boolean CalculatingStatus;
+
 }
