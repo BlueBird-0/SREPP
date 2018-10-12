@@ -117,7 +117,7 @@
                         </Tab>
                     </tabs>
                   </TabPane>
-                  <Button layoutX="699.0" layoutY="14.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="119.0" text="Graph" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                  <Button layoutX="699.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBtnGraph" prefHeight="23.0" prefWidth="119.0" text="Graph" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>
@@ -125,7 +125,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuOpen" text="Open" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Save As..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuProperties" text="Properties" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuExit" text="Exit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">

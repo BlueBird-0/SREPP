@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 
 public class MainProgramManager extends Application {
-	private Stage primaryStage;
+	static private Stage primaryStage;
 	private BorderPane rootLayout;
 	
 	@Override
@@ -20,10 +20,6 @@ public class MainProgramManager extends Application {
 			
 		initRootLayout();
 		showPersonOverView();
-		
-		//이후에 동작 실행
-		ComputeManager.pressCompute();
-
 	}
 	public void initRootLayout() {
 		try {
@@ -31,7 +27,6 @@ public class MainProgramManager extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainProgramManager.class.getResource("/view/RootLayout.fxml"));
 			rootLayout = (BorderPane)loader.load();
-			
 			// 상위 레이아웃을 포함하는 scene 을 보여준다.
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
@@ -56,7 +51,7 @@ public class MainProgramManager extends Application {
 	}
 	
 	//메인 스테이지를 반환한다.
-	public Stage getPrimaryStage() {
+	public static Stage getPrimaryStage() {
 		return primaryStage;
 	}
 	

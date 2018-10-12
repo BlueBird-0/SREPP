@@ -1,6 +1,4 @@
-/application/
 /GuiEventer/
-/DataManager/
+/application/
 /view/
-/FileSystem/
-/LogManager/
+/windows/

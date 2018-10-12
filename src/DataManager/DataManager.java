@@ -110,7 +110,7 @@ public class DataManager {
 		dataList.add(new Data("P_5", 10.1325,"배기가스 배출 후 연소실 압력( 대기압 P_1과 동일)"));
 		dataList.add(new Data("V_5", 43.2463267112761,"V_5=V_2   !air tank와 연소실 공기가 합쳐질떄 압력 및 온도 계산을 위한 V_5는 연소실 부피와 같음"));
 		dataList.add(new Data("P_a5", 174.1923,"4) 압축과정에서 양방향 체크밸브가 열려 air tank 공기압(P_2)와 연소실 가스압(P_5)가 섞일떄 압력 = (P_2*V_atk+P_5*V_5)/(V_atk+V_5)"));
-		dataList.add(new Data(1,"PRDopen", 235,"4) Push rod open시 압축기 로터 각도 "));
+		dataList.add(new Data(1,"PRDopen", 270,"4) Push rod open시 압축기 로터 각도 "));
 
 
 		dataList.add(new Data("p_c", 0.0,"압축기 공기압 (= IF(N73<PRDopen, S72*(P72/P73)^R73, S72*(Q72/Q73)^R73) (N/cm^2)"));
@@ -138,6 +138,18 @@ public class DataManager {
 		dataList.add(new Data("T_atkp", 918.360494386825,"8) 압축기 fully 압축시 공기온도 ! 이 온도는 T_2와 동일하여야 함."));
 		dataList.add(new Data("T_c_excel", 918.694623581914,"8) T_2와 같은 값인지 확인 필요"));
 
+
+
+		dataList.add(new Data("rpm_1", 7200, "2) 초기 로터 rpm"));
+		dataList.add(new Data("frcoevane", 0.1, "2) vane과 rotor 접촉면의 friction coefficient (=0.1)"));
+		dataList.add(new Data(" Efcomb", 0.98, "2) 연소실 연소효율0.95~0.98) 73페이지참조"));
+		dataList.add(new Data("Qloss", 0.15, "2) 엔진 열손실(전체 연료 발열량 대비 15~20%)"));
+		dataList.add(new Data("Rair", 287, "기체상수 ( = 0.287kJ/(Kg K) = 287 (J/kg K)"));
+	
+		dataList.add(new Data("P_Pst_3", 1188.58975305652, "피스톤엔진 연소실 연소후 초기압력(SRE과 동일양의 연료 분사 가정)"));
+		
+		
+		
 	}
 
 } 
