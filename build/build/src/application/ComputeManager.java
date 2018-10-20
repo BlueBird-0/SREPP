@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import DataManager.Data;
 import DataManager.DataManager;
 import DataManager.ResultData;
-import FileSystem.FileSystem;
 
 public class ComputeManager {
 	static double DIV360 = 0.0027777777777778;	// DIV360 =1/360값
@@ -122,7 +121,7 @@ public class ComputeManager {
 				break;
 			i++;
 			//5. P_2 값이 excel로 계산한 압축기 압력 P_c_excel과 동일한지 점검,      동일하면 go to step 7
-			if(Math.abs(DataManager.g("P_2") - DataManager.g("P_c_excel")) < FileSystem.tolerance)
+			if(Math.abs(DataManager.g("P_2") - DataManager.g("P_c_excel")) < 0.01)
 			{
 				break;
 			}
@@ -142,7 +141,7 @@ public class ComputeManager {
 		{
 			initCompute();
 			//8. T_2 값이 T_atkp와 동일한지 확인,     동일하면 계산 종료
-			if(Math.abs(DataManager.g("T_2") - DataManager.g("T_atkp")) < FileSystem.tolerance)
+			if(Math.abs(DataManager.g("T_2") - DataManager.g("T_atkp")) < 0.0000001)
 				break;
 			System.out.println("T_2:"+DataManager.g("T_2")+"\tT_atkp:"+DataManager.g("T_atkp"));
 			//9. T_2 값을 T_atkp 값으로 수정 후 go to step 8

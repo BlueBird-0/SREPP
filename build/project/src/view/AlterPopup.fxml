@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="popupPane" minHeight="240.0" minWidth="400.0" scaleShape="false" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.AlterPopupController">
+   <children>
+      <Text layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="변수" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="값" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="55.0" />
+      <Text layoutX="14.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="주석" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="90.0" />
+      <TextField fx:id="edit_key" disable="true" editable="false" layoutX="55.0" layoutY="15.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="15.0" />
+      <TextField fx:id="edit_value" layoutX="55.0" layoutY="51.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0" />
+      <TextArea fx:id="edit_comment" layoutX="55.0" layoutY="90.0" prefHeight="101.0" prefWidth="323.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="85.0" />
+      <Button layoutX="340.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleBtnAlter" text="변경" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+      <Button layoutX="286.0" layoutY="210.0" mnemonicParsing="false" onAction="#handleBtnCancle" text="취소" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="70.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="700.0" minWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.GraphPopupController">
+   <children>
+      <LineChart fx:id="graphView" layoutX="14.0" layoutY="14.0" stylesheets="@MyTheme.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+        <xAxis><NumberAxis label="Values for X-Axis" tickUnit="1" upperBound="3" fx:id="xView" /></xAxis>
+        <yAxis><NumberAxis fx:id="yView" label="Values for Y-Axis" lowerBound="0" tickUnit="1" upperBound="3" /></yAxis>
+      </LineChart>
+      <MenuButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="MenuButton" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>

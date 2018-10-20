@@ -210,7 +210,7 @@ public class Controller implements Initializable {
 			//팝업창 실행
 			final Stage dialog = new Stage();
 			dialog.initModality(Modality.APPLICATION_MODAL);
-			dialog.setTitle("SREPP Graph");
+			dialog.setTitle("입력 값 변경");
 			dialog.setResizable(false);
 
 			FXMLLoader loader = new FXMLLoader();
@@ -285,25 +285,14 @@ public class Controller implements Initializable {
 		}
 	}
 	
-	//Open button
-	@FXML
-	public void handleBtnMenuOpen(ActionEvent event) { 
-		FileSystem.fileOpen();
-		ComputeManager.initCompute();
-		ComputeManager.pressCompute();
-		onDraw();
-	}
 	//Save button
 	@FXML
-	public void handleBtnMenuSave(ActionEvent event) {
-		FileSystem.fileSave();
+	public void handleBtnMenuOpen(ActionEvent event) {
+
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.showOpenDialog(MainProgramManager.getPrimaryStage());
 	}
-	//SaveAs button
-	@FXML
-	public void handleBtnMenuSaveAs(ActionEvent event) {
-		FileSystem.fileSaveAs();
-	}
-	
 	
 	//그래픽 처리 함수
 
