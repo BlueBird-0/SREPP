@@ -134,7 +134,7 @@ public class FileSystem {
 		
 		FileChooser fileChooser = new FileChooser();
 		long time = System.currentTimeMillis(); 
-		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy_mm_dd hh:mm:ss");
+		SimpleDateFormat dayTime = new SimpleDateFormat("yyyy_mm_dd");
 		String timeStr = dayTime.format(new Date(time));
 		fileChooser.setInitialFileName("SREPP_"+timeStr);
 		fileChooser.setInitialDirectory(saveFolder);
