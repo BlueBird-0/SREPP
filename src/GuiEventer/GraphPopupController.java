@@ -14,6 +14,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class GraphPopupController implements Initializable{
@@ -22,6 +24,8 @@ public class GraphPopupController implements Initializable{
 	@FXML	private LineChart<Double, Double> graphView;
 	@FXML	private NumberAxis xView;
 	@FXML	private NumberAxis yView;
+	@FXML	private Text legendText1;
+	@FXML	private Text legendText2;
 	
 	public Stage stage;
 	@Override
@@ -34,13 +38,13 @@ public class GraphPopupController implements Initializable{
 		
 		LineChart.Series<Double, Double> series1 = new LineChart.Series<Double, Double>();
 		series1.setName("Series 1");
-		set2(series1);
+		set1(series1);
 		
 		lineChartData.add(series1);
 		
 		LineChart.Series<Double, Double> series2 = new LineChart.Series<Double, Double>();
 		series2.setName("Series 2");
-		set(series2);
+		set2(series2);
 		
 		lineChartData.add(series2);
 
@@ -59,11 +63,17 @@ public class GraphPopupController implements Initializable{
 		
 		xView.setLabel("Compression(or Expansion) Ratio"); 
 		yView.setLabel("Pressure(bar)");
+		legendText1.setText("Piston Engine");
+		legendText1.setFill(Color.GREEN);
+		legendText2.setText("SRE");
+		legendText2.setFill(Color.RED);
+		
+		graphView.setLegendVisible(false); 
 		graphView.setCreateSymbols(false);
 		graphView.setData(lineChartData);
 	}
 	
-	public void set(LineChart.Series<Double, Double> series)
+	public void set1(LineChart.Series<Double, Double> series)
 	{
 		for(ResultData data : DataManager.resultDataList)
 		{
@@ -83,7 +93,7 @@ public class GraphPopupController implements Initializable{
 	{
 		for(ResultData data : DataManager.resultDataList)
 		{
-			series.getData().add(new XYChart.Data<Double, Double>(data.g(26), data.g(30)));
+			series.getData().add(new XYChart.Data<Double, Double>(data.g(26), data.g(28)));
 		}
 		return ;
 	}
@@ -91,7 +101,7 @@ public class GraphPopupController implements Initializable{
 	{
 		for(ResultData data : DataManager.resultDataList)
 		{
-			series.getData().add(new XYChart.Data<Double, Double>(data.g(26), data.g(28)));
+			series.getData().add(new XYChart.Data<Double, Double>(data.g(26), data.g(30)));
 		}
 		return ;
 	}

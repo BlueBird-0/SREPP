@@ -11,6 +11,8 @@ import DataManager.DataManager;
 import DataManager.ResultData;
 import FileSystem.FileSystem;
 import application.ComputeManager;
+import application.GraphStage;
+import application.LogStage;
 import application.MainProgramManager;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -178,27 +180,6 @@ public class Controller implements Initializable {
 			}
 		});
 
-		
-		//사용할 수 없는 변수 막기
-		/*
-		parameterTableView.setRowFactory(tv -> {
-		    TableRow<Data> row = new TableRow<>();
-		    if(!row.isEmpty())
-		    {
-		    	System.out.println("1번");
-				if ( row.getItem().state != Data.STATE_CHANGEABLE )
-			    {
-					System.out.println("2번");
-			    	row.setDisable(false);
-			    	row.setOpacity(0.5);
-			    }
-		    }
-		    
-		    return row ;
-		});
-		*/
-		
-		
 		resultColumnList[0].setCellValueFactory(cellData -> Bindings.format("%.1f", cellData.getValue().getValue(0)));
 		resultColumnList[1].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(1)));
 		resultColumnList[2].setCellValueFactory(cellData -> Bindings.format("%.5f", cellData.getValue().getValue(2)));
@@ -258,38 +239,12 @@ public class Controller implements Initializable {
 	@FXML
 	public void handleBtnGraph(ActionEvent event) { 
 		if(event.getSource() instanceof Button) {
-			Button btn = (Button) event.getSource();
-			System.out.println("그래프 출력");
-			//팝업창 실행
-			final Stage dialog = new Stage();
-			dialog.initModality(Modality.APPLICATION_MODAL);
-			dialog.setTitle("SREPP Graph");
-			dialog.setResizable(false);
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(MainProgramManager.class.getResource("/view/GraphPopup.fxml"));
-
-			AnchorPane popup = null; 
-			try {
-				popup = (AnchorPane)loader.load();					
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Scene dialogScene = new Scene(popup);						
-
-			GraphPopupController controller = loader.getController();
-
-			// 상위 레이아웃을 포함하는 scene 을 보여준다.
-
-			dialog.setScene(dialogScene);
-			dialog.show();
-			dialog.setOnHidden(event_c->{
-				onDraw();
-			});
+			new GraphStage();
 		}
+	}
+	@FXML
+	public void handleBtnMenuCalculation(ActionEvent event) {
+		new LogStage();
 	}
 
 	//Properties button

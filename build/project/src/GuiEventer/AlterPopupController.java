@@ -55,6 +55,11 @@ public class AlterPopupController implements Initializable {
 	}
 	
 	public final void setData(Data data) {
+		if(data.state != Data.STATE_CHANGEABLE)
+		{
+			System.out.println("±ÝÁö!");
+			edit_value.setDisable(true);
+		}
 		edit_key.setText(data.key.get());
 		edit_value.setText(data.value.asString().get());
 		edit_comment.setText(data.comment.get());

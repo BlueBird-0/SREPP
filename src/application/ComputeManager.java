@@ -6,6 +6,9 @@ import DataManager.Data;
 import DataManager.DataManager;
 import DataManager.ResultData;
 import FileSystem.FileSystem;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class ComputeManager {
 	static double DIV360 = 0.0027777777777778;	// DIV360 =1/360°ª

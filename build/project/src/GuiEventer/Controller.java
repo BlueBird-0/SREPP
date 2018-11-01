@@ -13,7 +13,13 @@ import FileSystem.FileSystem;
 import application.ComputeManager;
 import application.MainProgramManager;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +30,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -93,17 +100,41 @@ public class Controller implements Initializable {
 		keyColumn.setCellValueFactory(cellData -> cellData.getValue().getKey());
 		valueColumn.setCellValueFactory(cellData -> cellData.getValue().getValue().asObject());
 		commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
-
+		commentColumn.getStyleClass().add("leftAlignedTableColumnHeader");
+		 
+		System.out.println(parameterTableView.getPrefWidth() );
+		System.out.println(keyColumn.getPrefWidth()); 
+		System.out.println(valueColumn.getPrefWidth()); 
+		commentColumn.setPrefWidth(parameterTableView.getPrefWidth() - keyColumn.getPrefWidth() - valueColumn.getPrefWidth());
+		System.out.println(parameterTableView.getPrefWidth() - keyColumn.getPrefWidth() - valueColumn.getPrefWidth());
+		
 		TableColumn<ResultData, String> resultColumnList[] = new TableColumn[] { result01Column, result02Column,
 				result03Column, result04Column, result05Column, result06Column, result07Column, result08Column,
 				result09Column, result10Column, result11Column, result12Column, result13Column, result14Column,
 				result15Column, result16Column, result17Column, result18Column, result19Column, result20Column,
 				result21Column, result22Column, result23Column, result24Column, result25Column, result26Column,
 				result27Column, result28Column, result29Column, result30Column, result31Column };
-		
-		
-		parameterTableView.setRowFactory(tv->{
-			TableRow<Data> row = new TableRow<>();
+	
+		parameterTableView.setRowFactory(new Callback<TableView<Data>, TableRow<Data>>(){
+			@Override
+			public TableRow<Data> call(TableView<Data> param) {
+				final TableRow<Data> row = new TableRow<Data>() {
+					@Override
+					protected void updateItem(Data row, boolean empty) {
+						super.updateItem(row, empty);
+						//변경 불가능한 숫자 일 때,
+						BooleanProperty selected = new SimpleBooleanProperty(false);
+						if(empty != true)
+							if(row.state != Data.STATE_CHANGEABLE)
+								selected = new SimpleBooleanProperty(true);
+						
+						if(!empty)
+							styleProperty().bind(Bindings.when(selected)
+									.then("-fx-opacity: 0.5;")
+									.otherwise(""));
+					}
+				};
+				// 마우스 클릭 이벤트
 				row.setOnMouseClicked(event ->{
 					if(event.getClickCount() == 2 && (!row.isEmpty())) {
 						Data data = row.getItem();
@@ -143,10 +174,31 @@ public class Controller implements Initializable {
 						});
 					}
 				});
-			return row;
+				return row;
+			}
 		});
-				
-	
+
+		
+		//사용할 수 없는 변수 막기
+		/*
+		parameterTableView.setRowFactory(tv -> {
+		    TableRow<Data> row = new TableRow<>();
+		    if(!row.isEmpty())
+		    {
+		    	System.out.println("1번");
+				if ( row.getItem().state != Data.STATE_CHANGEABLE )
+			    {
+					System.out.println("2번");
+			    	row.setDisable(false);
+			    	row.setOpacity(0.5);
+			    }
+		    }
+		    
+		    return row ;
+		});
+		*/
+		
+		
 		resultColumnList[0].setCellValueFactory(cellData -> Bindings.format("%.1f", cellData.getValue().getValue(0)));
 		resultColumnList[1].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(1)));
 		resultColumnList[2].setCellValueFactory(cellData -> Bindings.format("%.5f", cellData.getValue().getValue(2)));
@@ -183,9 +235,10 @@ public class Controller implements Initializable {
 		for (ResultData data : DataManager.resultDataList) {
 			oResultDataList.add(data);
 		}
+		//parameterTableView.setItems(oDataList);	
 		parameterTableView.setItems(oDataList);
 		resultTableView.setItems(oResultDataList);
-		
+
 		onDraw();
 	}
 
@@ -210,7 +263,7 @@ public class Controller implements Initializable {
 			//팝업창 실행
 			final Stage dialog = new Stage();
 			dialog.initModality(Modality.APPLICATION_MODAL);
-			dialog.setTitle("입력 값 변경");
+			dialog.setTitle("SREPP Graph");
 			dialog.setResizable(false);
 
 			FXMLLoader loader = new FXMLLoader();
@@ -285,14 +338,25 @@ public class Controller implements Initializable {
 		}
 	}
 	
+	//Open button
+	@FXML
+	public void handleBtnMenuOpen(ActionEvent event) { 
+		FileSystem.fileOpen();
+		ComputeManager.initCompute();
+		ComputeManager.pressCompute();
+		onDraw();
+	}
 	//Save button
 	@FXML
-	public void handleBtnMenuOpen(ActionEvent event) {
-
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File");
-		fileChooser.showOpenDialog(MainProgramManager.getPrimaryStage());
+	public void handleBtnMenuSave(ActionEvent event) {
+		FileSystem.fileSave();
 	}
+	//SaveAs button
+	@FXML
+	public void handleBtnMenuSaveAs(ActionEvent event) {
+		FileSystem.fileSaveAs();
+	}
+	
 	
 	//그래픽 처리 함수
 

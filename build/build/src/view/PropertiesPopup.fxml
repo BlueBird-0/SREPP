@@ -6,11 +6,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text layoutX="30.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="정밀도" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="30.0" />
-      <TextField layoutX="67.0" layoutY="26.0" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="26.0" />
+      <Text layoutX="30.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="정밀도" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="60.0" />
+      <TextField layoutX="67.0" layoutY="26.0" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="56.0" />
       <Button layoutX="259.0" layoutY="448.0" mnemonicParsing="false" text="저장" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Text layoutX="20.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="저장 폴더" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="96.0" />
+      <TextField disable="true" layoutX="86.0" layoutY="92.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="92.0" />
+      <Button layoutX="296.0" layoutY="92.0" mnemonicParsing="false" text="..." AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="92.0" />
+      <Text layoutX="17.0" layoutY="469.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2018.10.21" wrappingWidth="138.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Text>
+      <Text layoutX="20.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BlueBird" wrappingWidth="138.0" AnchorPane.leftAnchor="20.0" />
+      <Text layoutX="135.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SREPP 1.0ver" wrappingWidth="80.0" AnchorPane.topAnchor="24.0" />
    </children>
 </AnchorPane>

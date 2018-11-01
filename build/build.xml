@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<project name="SREPP" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<project name="SRE" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
 	<target name="init-fx-tasks">
 		<path id="fxant">
 			<filelist>
-		<!--		<file name="${java.home}\..\lib\ant-javafx.jar"/>		-->	
-		<!--		<file name="${java.home}\lib\jfxrt.jar"/>				-->
-				<file name="C:\Program Files\Java\jdk-10.0.2\lib\ant-javafx.jar"/>
-				<file name="C:\Program Files\Java\jdk-10.0.2\lib\jfxrt.jar"/>		
-				<file name="${basedir}"/>
+				<file name="${java.home}\lib\ant-javafx.jar"/>
+				<file name="${java.home}\lib\jfxrt.jar"/>
 			</filelist>
 		</path>
 	
@@ -25,7 +22,7 @@
 	
 		<mkdir dir="project" />
 		<copy todir="project">
-			<fileset dir="C:\Users\wku\eclipse-workspace\SREPP">
+			<fileset dir="C:\Users\wku\eclipse-workspace\SRE">
 				<include name="src/**" />
 			</fileset>
 		</copy>
@@ -85,22 +82,20 @@
 	
 	
 		<fx:resources id="appRes">
-			<fx:fileset dir="dist" includes="SREPP.jar"/>
+			<fx:fileset dir="dist" includes="SRE.jar"/>
 			<fx:fileset dir="dist" includes="libs/*"/>
-			<fx:fileset dir="dist" includes="resources/**"/>
 		</fx:resources>
 	
 		<fx:application id="fxApplication"
 			name="SREPP"
 			mainClass="application.MainProgramManager"
-			version="1.0"
 		/>
 	
 		<mkdir dir="build/classes/META-INF" />
 	
 	
 	
-		<fx:jar destfile="dist/SREPP.jar">
+		<fx:jar destfile="dist/SRE.jar">
 			<fx:application refid="fxApplication"/>
 			<fileset dir="build/classes">
 			</fileset>
@@ -123,12 +118,11 @@
 			includeDT="false"
 			offlineAllowed="true"
 			outdir="${basedir}/deploy"
-			outfile="SREPP" nativeBundles="exe"
+			outfile="SRE" nativeBundles="exe"
 			updatemode="background" >
 	
-			<!-- <fx:platform basedir="${java.home}"/>-->
-			<!--<fx:platform basedir="C:\Program Files\Java\jdk-10.0.2\"/>-->
-			<fx:info title="SREPP" vendor="bluebird"/>
+			<!--<fx:platform basedir="${java.home}"/>-->
+			<fx:info title="SRE" vendor="bluebird"/>
 	
 			<fx:application refId="fxApplication"/>
 			<fx:resources refid="appRes"/>

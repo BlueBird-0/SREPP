@@ -1,0 +1,21 @@
+
+/*그래프에서 사용하는 디자인*/
+.chart-series-line {    
+    -fx-stroke-width : 2px;
+    -fx-effect : null;
+} 
+.default-color0.chart-series-line {-fx-stroke : #e9967a; }
+.default-color1.chart-series-line {-fx-stroke : #408080; }
+.default-color2.chart-series-line {-fx-stroke : #e9967a; }
+.default-color3.chart-series-line {-fx-stroke : #408080; } 
+
+
+
+/*화면 분할 창 두께 조절*/
+.split-pane-divider {
+	-fx-padding: 1;
+}
+
+.column-header.leftAlignedTableColumnHeader > .label {
+	-fx-alignment: center-left;
+}
