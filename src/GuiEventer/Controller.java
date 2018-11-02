@@ -10,6 +10,7 @@ import DataManager.Data;
 import DataManager.DataManager;
 import DataManager.ResultData;
 import FileSystem.FileSystem;
+import LogManager.LogManager;
 import application.ComputeManager;
 import application.GraphStage;
 import application.LogStage;
@@ -103,11 +104,10 @@ public class Controller implements Initializable {
 		valueColumn.setCellValueFactory(cellData -> cellData.getValue().getValue().asObject());
 		commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
 		commentColumn.getStyleClass().add("leftAlignedTableColumnHeader");
-		 
+		  
 		System.out.println(parameterTableView.getPrefWidth() );
 		System.out.println(keyColumn.getPrefWidth()); 
 		System.out.println(valueColumn.getPrefWidth()); 
-		commentColumn.setPrefWidth(parameterTableView.getPrefWidth() - keyColumn.getPrefWidth() - valueColumn.getPrefWidth());
 		System.out.println(parameterTableView.getPrefWidth() - keyColumn.getPrefWidth() - valueColumn.getPrefWidth());
 		
 		TableColumn<ResultData, String> resultColumnList[] = new TableColumn[] { result01Column, result02Column,
@@ -333,14 +333,16 @@ public class Controller implements Initializable {
 		
 		runComputeThread();
 	}
-	
-
+	 
+  
 	public void runComputeThread()
 	{              
 	    Thread thread = new Thread() {
 	        @Override
 	        public void run() {
-	        	System.out.println("calculate thread run");
+
+	        	LogManager.println("start calculat. . .");
+	        	System.out.println("start calculat. . .");
 	            while (ComputeManager.CalculatingStatus) {
 	                Platform.runLater(() -> {
 	                	if(calculatingNotice.getText().equals("Calculating.  "))

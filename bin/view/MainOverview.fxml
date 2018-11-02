@@ -9,20 +9,20 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.Controller">
+<AnchorPane minHeight="130.0" minWidth="80.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.Controller">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <children>
-      <SplitPane dividerPositions="0.35208012326656396" layoutY="25.0" stylesheets="@MyTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <SplitPane dividerPositions="0.35208012326656396" layoutY="25.0" minHeight="70.0" stylesheets="@MyTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="80.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <TableView fx:id="parameterTableView" layoutX="20.0" layoutY="118.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                     <columns> 
                       <TableColumn fx:id="keyColumn" prefWidth="75.0" text="변수" />
                       <TableColumn fx:id="valueColumn" prefWidth="75.0" text="값" />
-                      <TableColumn fx:id="commentColumn" prefWidth="100.0" text="설명" />
+                      <TableColumn fx:id="commentColumn" prefWidth="450.0" text="  설명" />
                     </columns>
                   </TableView>
                   <CheckBox layoutX="365.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleBtnAll" text="전체보기" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />

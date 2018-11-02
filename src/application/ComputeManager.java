@@ -6,6 +6,8 @@ import DataManager.Data;
 import DataManager.DataManager;
 import DataManager.ResultData;
 import FileSystem.FileSystem;
+import LogManager.LogManager;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -110,15 +112,14 @@ public class ComputeManager {
 		{
 			initCompute();
 			//후 계산 Excel 테이블의 p_c 값이 P_a5가 되는 각도 확인하여 PRDopen으로 지정
-			System.out.println(nearSearch(DataManager.g("P_a5")));
 			DataManager.setData("PRDopen", nearSearch(DataManager.g("P_a5")));
 			initCompute();
 				//=R612
 				DataManager.setData("P_c_excel", DataManager.resultDataList.get(DataManager.resultDataList.size()-1).g(4));
 				//=S612+273
 				DataManager.setData("T_c_excel", DataManager.resultDataList.get(DataManager.resultDataList.size()-1).g(5)+273);
-			System.out.println("____________________________________________________");
-			System.out.println("PRDopen:"+DataManager.g("PRDopen") + "\t" + "P_a5:"+DataManager.g("P_a5") +"\t" + "P_2:"+DataManager.g("P_2") +"\t" + "P_c_excel:"+DataManager.g("P_c_excel"));
+			LogManager.println("__________"+"압력계산 "+i+"번째"+"__________");
+			LogManager.println("PRDopen:"+DataManager.g("PRDopen") + "\t\t" + "P_a5:"+DataManager.g("P_a5") +"\t\t" + "P_2:"+DataManager.g("P_2") +"\t\t" + "P_c_excel:"+DataManager.g("P_c_excel"));
 			
 			//TODO test용 코드
 			if(i==100)
@@ -139,6 +140,7 @@ public class ComputeManager {
 	
 	public static void temperatureCompute()
 	{	
+		LogManager.println("__________"+"온도 계산"+"__________");
 		//7. T_2 가정
 		DataManager.setData("T_2", 900);
 		while(true)
@@ -147,13 +149,15 @@ public class ComputeManager {
 			//8. T_2 값이 T_atkp와 동일한지 확인,     동일하면 계산 종료
 			if(Math.abs(DataManager.g("T_2") - DataManager.g("T_atkp")) < FileSystem.tolerance)
 				break;
-			System.out.println("T_2:"+DataManager.g("T_2")+"\tT_atkp:"+DataManager.g("T_atkp"));
+			LogManager.println("T_2:"+DataManager.g("T_2")+"\t\tT_atkp:"+DataManager.g("T_atkp"));
 			//9. T_2 값을 T_atkp 값으로 수정 후 go to step 8
 			DataManager.setData("T_2", DataManager.g("T_atkp"));
 		}
 
 		CalculatingStatus = false;
-		System.out.println("계산끝");
+		LogManager.println("__________계산끝__________");
+		LogManager.println("");
+		LogManager.println("");
 	}
 
 	static ArrayList<Double> p_cList = new ArrayList<>();

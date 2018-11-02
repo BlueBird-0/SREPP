@@ -12,41 +12,6 @@ import javafx.stage.Stage;
 public class LogStage extends Stage{
 	
 	public LogStage() {
-		LogManager.print("wowowowowow 여기서 문자 추가 : "+ 10);
-		LogManager.println("두번 째 문자 추가 : "+ 20);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.println("세번째 문자 추가"+ 30);
-		LogManager.print("마지막 추가 : "+ 40);
-		
 		 
 		this.setTitle("Calculation Process");
 		FXMLLoader loader = new FXMLLoader();
