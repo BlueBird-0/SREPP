@@ -10,7 +10,10 @@ import DataManager.Data;
 import DataManager.DataManager;
 import DataManager.ResultData;
 import FileSystem.FileSystem;
+import LogManager.LogManager;
 import application.ComputeManager;
+import application.GraphStage;
+import application.LogStage;
 import application.MainProgramManager;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
@@ -54,6 +57,8 @@ public class Controller implements Initializable {
 
 	/* 오른쪽 결과창 */
 	@FXML	private TableView<ResultData> resultTableView;
+	@FXML	private TableView<ResultData> resultTableView1;
+	@FXML	private TableView<ResultData> resultTableView2;
 	@FXML	private TableColumn<ResultData, Double> result01Column;
 	@FXML	private TableColumn<ResultData, Double> result02Column;
 	@FXML	private TableColumn<ResultData, Double> result03Column;
@@ -86,6 +91,24 @@ public class Controller implements Initializable {
 	@FXML	private TableColumn<ResultData, Double> result30Column;
 	@FXML	private TableColumn<ResultData, Double> result31Column;
 	
+	
+	/*output1*/
+	@FXML	private TableColumn<ResultData, Double> result11Column1;
+	@FXML	private TableColumn<ResultData, Double> result12Column1;
+	@FXML	private TableColumn<ResultData, Double> result13Column1;
+	@FXML	private TableColumn<ResultData, Double> result14Column1;
+	@FXML	private TableColumn<ResultData, Double> result15Column1;
+	@FXML	private TableColumn<ResultData, Double> result16Column1;
+	@FXML	private TableColumn<ResultData, Double> result17Column1;
+	
+	@FXML	private TableColumn<ResultData, Double> result18Column1;
+	@FXML	private TableColumn<ResultData, Double> result19Column1;
+	@FXML	private TableColumn<ResultData, Double> result20Column1;
+	@FXML	private TableColumn<ResultData, Double> result21Column1;
+	@FXML	private TableColumn<ResultData, Double> result22Column1;
+	@FXML	private TableColumn<ResultData, Double> result23Column1;
+	@FXML	private TableColumn<ResultData, Double> result24Column1;
+	
 	@FXML	public Text calculatingNotice;	ObservableList<Data> oDataList = FXCollections.observableArrayList();
 	ObservableList<ResultData> oResultDataList = FXCollections.observableArrayList();
 
@@ -101,11 +124,10 @@ public class Controller implements Initializable {
 		valueColumn.setCellValueFactory(cellData -> cellData.getValue().getValue().asObject());
 		commentColumn.setCellValueFactory(cellData -> cellData.getValue().getComment());
 		commentColumn.getStyleClass().add("leftAlignedTableColumnHeader");
-		 
+		  
 		System.out.println(parameterTableView.getPrefWidth() );
 		System.out.println(keyColumn.getPrefWidth()); 
 		System.out.println(valueColumn.getPrefWidth()); 
-		commentColumn.setPrefWidth(parameterTableView.getPrefWidth() - keyColumn.getPrefWidth() - valueColumn.getPrefWidth());
 		System.out.println(parameterTableView.getPrefWidth() - keyColumn.getPrefWidth() - valueColumn.getPrefWidth());
 		
 		TableColumn<ResultData, String> resultColumnList[] = new TableColumn[] { result01Column, result02Column,
@@ -114,6 +136,13 @@ public class Controller implements Initializable {
 				result15Column, result16Column, result17Column, result18Column, result19Column, result20Column,
 				result21Column, result22Column, result23Column, result24Column, result25Column, result26Column,
 				result27Column, result28Column, result29Column, result30Column, result31Column };
+
+		TableColumn<ResultData, String> output1List[] = new TableColumn[] { result11Column1,
+				result12Column1, result13Column1, result14Column1, result15Column1,
+				result16Column1, result17Column1 };
+		TableColumn<ResultData, String> output2List[] = new TableColumn[] { result18Column1,
+				result19Column1, result20Column1, result21Column1, result22Column1,
+				result23Column1, result24Column1 };
 	
 		parameterTableView.setRowFactory(new Callback<TableView<Data>, TableRow<Data>>(){
 			@Override
@@ -176,29 +205,8 @@ public class Controller implements Initializable {
 				});
 				return row;
 			}
-		});
+		}); 
 
-		
-		//사용할 수 없는 변수 막기
-		/*
-		parameterTableView.setRowFactory(tv -> {
-		    TableRow<Data> row = new TableRow<>();
-		    if(!row.isEmpty())
-		    {
-		    	System.out.println("1번");
-				if ( row.getItem().state != Data.STATE_CHANGEABLE )
-			    {
-					System.out.println("2번");
-			    	row.setDisable(false);
-			    	row.setOpacity(0.5);
-			    }
-		    }
-		    
-		    return row ;
-		});
-		*/
-		
-		
 		resultColumnList[0].setCellValueFactory(cellData -> Bindings.format("%.1f", cellData.getValue().getValue(0)));
 		resultColumnList[1].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(1)));
 		resultColumnList[2].setCellValueFactory(cellData -> Bindings.format("%.5f", cellData.getValue().getValue(2)));
@@ -231,13 +239,37 @@ public class Controller implements Initializable {
 		resultColumnList[29].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(29)));
 		resultColumnList[30].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(30)));
 		
+
+		/*output1*/
+		output1List[0].setCellValueFactory(cellData -> Bindings.format("%.7f", cellData.getValue().getValue(10)));
+		output1List[1].setCellValueFactory(cellData -> Bindings.format("%.0f", cellData.getValue().getValue(11)));
+		output1List[2].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(12)));
+		output1List[3].setCellValueFactory(cellData -> Bindings.format("%.5f", cellData.getValue().getValue(13)));
+		output1List[4].setCellValueFactory(cellData -> Bindings.format("%.6f", cellData.getValue().getValue(14)));
+		output1List[5].setCellValueFactory(cellData -> Bindings.format("%.2f", cellData.getValue().getValue(15)));
+		output1List[6].setCellValueFactory(cellData -> Bindings.format("%.7f", cellData.getValue().getValue(16)));
+		
+		output2List[0].setCellValueFactory(cellData -> Bindings.format("%.0f", cellData.getValue().getValue(17)));
+		output2List[1].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(18)));
+		output2List[2].setCellValueFactory(cellData -> Bindings.format("%.5f", cellData.getValue().getValue(19)));
+		output2List[3].setCellValueFactory(cellData -> Bindings.format("%.4f", cellData.getValue().getValue(20)));
+		output2List[4].setCellValueFactory(cellData -> Bindings.format("%.2f", cellData.getValue().getValue(21)));
+		output2List[5].setCellValueFactory(cellData -> Bindings.format("%.4f", cellData.getValue().getValue(22)));
+		output2List[6].setCellValueFactory(cellData -> Bindings.format("%.1f", cellData.getValue().getValue(23)));
+		
 		
 		for (ResultData data : DataManager.resultDataList) {
 			oResultDataList.add(data);
 		}
+		
+		
+		
 		//parameterTableView.setItems(oDataList);	
 		parameterTableView.setItems(oDataList);
 		resultTableView.setItems(oResultDataList);
+		resultTableView1.setItems(oResultDataList);
+		resultTableView2.setItems(oResultDataList);
+
 
 		onDraw();
 	}
@@ -258,38 +290,12 @@ public class Controller implements Initializable {
 	@FXML
 	public void handleBtnGraph(ActionEvent event) { 
 		if(event.getSource() instanceof Button) {
-			Button btn = (Button) event.getSource();
-			System.out.println("그래프 출력");
-			//팝업창 실행
-			final Stage dialog = new Stage();
-			dialog.initModality(Modality.APPLICATION_MODAL);
-			dialog.setTitle("SREPP Graph");
-			dialog.setResizable(false);
-
-			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(MainProgramManager.class.getResource("/view/GraphPopup.fxml"));
-
-			AnchorPane popup = null; 
-			try {
-				popup = (AnchorPane)loader.load();					
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			Scene dialogScene = new Scene(popup);						
-
-			GraphPopupController controller = loader.getController();
-
-			// 상위 레이아웃을 포함하는 scene 을 보여준다.
-
-			dialog.setScene(dialogScene);
-			dialog.show();
-			dialog.setOnHidden(event_c->{
-				onDraw();
-			});
+			new GraphStage();
 		}
+	}
+	@FXML
+	public void handleBtnMenuCalculation(ActionEvent event) {
+		new LogStage();
 	}
 
 	//Properties button
@@ -378,14 +384,16 @@ public class Controller implements Initializable {
 		
 		runComputeThread();
 	}
-	
-
+	 
+  
 	public void runComputeThread()
 	{              
 	    Thread thread = new Thread() {
 	        @Override
 	        public void run() {
-	        	System.out.println("calculate thread run");
+
+	        	LogManager.println("start calculat. . .");
+	        	System.out.println("start calculat. . .");
 	            while (ComputeManager.CalculatingStatus) {
 	                Platform.runLater(() -> {
 	                	if(calculatingNotice.getText().equals("Calculating.  "))

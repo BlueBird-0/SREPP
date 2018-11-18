@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -9,31 +10,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.Controller">
+<AnchorPane minHeight="130.0" minWidth="80.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.Controller">
    <opaqueInsets>
       <Insets />
    </opaqueInsets>
    <children>
-      <SplitPane dividerPositions="0.35208012326656396" layoutY="25.0" stylesheets="@MyTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+      <SplitPane dividerPositions="0.35208012326656396" layoutY="25.0" minHeight="70.0" stylesheets="@MyTheme.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="80.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <TableView fx:id="parameterTableView" layoutX="20.0" layoutY="118.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                     <columns> 
                       <TableColumn fx:id="keyColumn" prefWidth="75.0" text="변수" />
                       <TableColumn fx:id="valueColumn" prefWidth="75.0" text="값" />
-                      <TableColumn fx:id="commentColumn" prefWidth="100.0" text="설명" />
+                      <TableColumn fx:id="commentColumn" prefWidth="450.0" text="  설명" />
                     </columns>
                   </TableView>
                   <CheckBox layoutX="365.0" layoutY="89.0" mnemonicParsing="false" onAction="#handleBtnAll" text="전체보기" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
-                  <TextField layoutX="20.0" layoutY="48.0" text="search" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                  <TextField layoutX="20.0" layoutY="48.0" text="search" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="660.0" prefWidth="457.0">
                <children>
                   <TabPane layoutX="24.0" layoutY="98.0" prefHeight="582.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                     <tabs>
-                      <Tab text="page1">
+                      <Tab text="    All    ">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -105,14 +106,77 @@
                                  </children></AnchorPane>
                         </content>
                       </Tab>
-                      <Tab text="page2">
+                      <Tab text="output1">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="resultTableView1" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="시간">
+                                             <columns>
+                                                <TableColumn fx:id="result11Column1" prefWidth="75.0" text="t" />
+                                             </columns>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="Roter 운동">
+                                             <columns>
+                                                <TableColumn fx:id="result12Column1" prefWidth="75.0" text="α" />
+                                                <TableColumn fx:id="result13Column1" prefWidth="75.0" text="ω" />
+                                                <TableColumn fx:id="result14Column1" prefWidth="75.0" text="a(rad)" />
+                                                <TableColumn fx:id="result15Column1" prefWidth="75.0" text="a(degree)" />
+                                                <TableColumn fx:id="result16Column1" prefWidth="75.0" text="rpm" />
+                                             </columns>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="출력">
+                                             <columns>
+                                                <TableColumn fx:id="result17Column1" prefWidth="75.0" text="ps" />
+                                             </columns>
+                                          </TableColumn>
+                                       </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
-                        <Tab text="page3">
+                        <Tab text="output2">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="resultTableView2" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columns>
+                                          <TableColumn prefWidth="75.0" text="시간">
+                                             <columns>
+                                                <TableColumn fx:id="result18Column1" prefWidth="75.0" text="t" />
+                                             </columns>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="Rotor 운동(펌프일, 마찰력 반영)">
+                                             <columns>
+                                                <TableColumn fx:id="result19Column1" prefWidth="75.0" text="α" />
+                                                <TableColumn fx:id="result20Column1" prefWidth="75.0" text="ω" />
+                                                <TableColumn fx:id="result21Column1" prefWidth="75.0" text="a(rad)" />
+                                                <TableColumn fx:id="result22Column1" prefWidth="75.0" text="a(degree)" />
+                                                <TableColumn fx:id="result23Column1" prefWidth="75.0" text="rpm" />
+                                             </columns>
+                                          </TableColumn>
+                                          <TableColumn prefWidth="75.0" text="출력">
+                                             <columns>
+                                                <TableColumn fx:id="result24Column1" prefWidth="75.0" text="ps" />
+                                             </columns>
+                                          </TableColumn>
+                                       </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Explain">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="552.0" fitWidth="820.0" layoutX="14.0" layoutY="14.0" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                                       <image>
+                                          <Image url="@../../../../Desktop/캡처3.PNG" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
                            </content>
                         </Tab>
                     </tabs>
@@ -133,14 +197,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuExit" text="Exit" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="View">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuCalculation" text="Calculation" />
             </items>
           </Menu>
         </menus>

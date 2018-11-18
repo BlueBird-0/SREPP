@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import DataManager.Data;
 import DataManager.DataManager;
+import LogManager.LogManager;
 import application.ComputeManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,8 +68,12 @@ public class AlterPopupController implements Initializable {
 	
 	@FXML
 	public void handleBtnAlter(ActionEvent event) {
+		String past = DataManager.getData(edit_key.getText()).key.get() + DataManager.getData(edit_key.getText()).value.get();
 		DataManager.setData(edit_key.getText(), Double.parseDouble(edit_value.getText()), edit_comment.getText());
-		System.out.println("변수변경 : "+edit_key.getText()+"\t"+edit_value.getText()+"\t"+edit_comment.getText());
+		
+		LogManager.println("");
+		LogManager.println("변수변경 전 : "+past);
+		LogManager.println("변수변경 후 : "+edit_key.getText()+"\t"+edit_value.getText()+"\t"+edit_comment.getText());
 		ComputeManager.initCompute();
 		ComputeManager.pressCompute();
 		stage.hide();

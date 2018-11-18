@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
@@ -10,25 +12,34 @@
 
 <AnchorPane minHeight="550.0" minWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuiEventer.GraphPopupController">
    <children>
-      <LineChart fx:id="graphView" layoutX="14.0" layoutY="14.0" stylesheets="@MyTheme.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+      <LineChart fx:id="graphView" layoutX="14.0" layoutY="14.0" stylesheets="@MyTheme.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <xAxis><NumberAxis label="Values for X-Axis" tickUnit="1" upperBound="3" fx:id="xView" /></xAxis>
         <yAxis><NumberAxis fx:id="yView" label="Values for Y-Axis" lowerBound="0" tickUnit="1" upperBound="3" /></yAxis>
       </LineChart>
-      <MenuButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="MenuButton" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <MenuButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="MenuButton" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Text fx:id="legendText1" layoutX="425.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend Text1" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="130.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <Text fx:id="legendText2" layoutX="423.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend Text2" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
+      <AnchorPane layoutX="381.0" layoutY="106.0" style="-fx-background-color: #f2f2f2;" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <Text fx:id="legendText1" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend Text1" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text fx:id="legendText2" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Legend Text2" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="18.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Line fx:id="legendLine1" endX="15.0" layoutX="24.0" layoutY="18.0" startX="-15.0" strokeWidth="3.0" style="-fx-stroke: #007D00;" />
+            <Line fx:id="legendLine2" endX="15.0" layoutX="24.0" layoutY="37.0" startX="-15.0" strokeWidth="3.0" style="-fx-stroke: #FF0000; -fx-stroke-dash-array: 2 7 7 2;" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
+         </padding>
+      </AnchorPane>
    </children>
 </AnchorPane>
