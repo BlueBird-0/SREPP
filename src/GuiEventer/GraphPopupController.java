@@ -1,5 +1,6 @@
 package GuiEventer;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -14,6 +15,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;

@@ -21,7 +21,9 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class FileSystem {
 	// 프로그램 설정 값 저장
 	public static boolean checkedAllList = false;
-	public static double tolerance = 0.0000001;
+	//public static double tolerance = 0.0000001;
+	public static double tolerance = 0.01;
+	
 	public static String saveDirectory = "";
 	
 	public static void setDirectory()

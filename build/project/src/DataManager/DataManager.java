@@ -45,7 +45,7 @@ public class DataManager {
 
 	//dataList의 'string'과 같은 key 에 들어있는 double를 얻어옴
 	@SuppressWarnings("null")
-	public static double g(String key)
+	public static double g(String key) 
 	{
 		for(Data data : dataList)
 		{
@@ -72,6 +72,40 @@ public class DataManager {
 			}
 		}
 		return changeableList;
+	}
+
+	public static ArrayList<Data> getProperties()
+	{
+		ArrayList<Data> changeableList = new ArrayList<>();
+		for (Data data : dataList) {
+			if (data.state == 1|| data.state == 0)
+			{
+				changeableList.add(data);
+			}
+		}
+		return changeableList;
+	}
+	public static ArrayList<Data> getPistonEngineList()
+	{
+		ArrayList<Data> pistonEngineList = new ArrayList<>();
+		for	(Data data : dataList) {
+			if(data.state == 2)
+			{
+				pistonEngineList.add(data);
+			}
+		}
+		return pistonEngineList;
+	}
+	public static ArrayList<Data> getSreEngineList()
+	{
+		ArrayList<Data> pistonEngineList = new ArrayList<>();
+		for	(Data data : dataList) {
+			if(data.state == 3)
+			{
+				pistonEngineList.add(data);
+			}
+		}
+		return pistonEngineList;
 	}
 	
 	
@@ -139,17 +173,95 @@ public class DataManager {
 		dataList.add(new Data("T_c_excel", 918.694623581914,"8) T_2와 같은 값인지 확인 필요"));
 
 
-
+		//엔진 운용 상태
 		dataList.add(new Data("rpm_1", 7200, "2) 초기 로터 rpm"));
 		dataList.add(new Data("frcoevane", 0.1, "2) vane과 rotor 접촉면의 friction coefficient (=0.1)"));
-		dataList.add(new Data(" Efcomb", 0.98, "2) 연소실 연소효율0.95~0.98) 73페이지참조"));
+		dataList.add(new Data("Efcomb", 0.98, "2) 연소실 연소효율0.95~0.98) 73페이지참조"));
 		dataList.add(new Data("Qloss", 0.15, "2) 엔진 열손실(전체 연료 발열량 대비 15~20%)"));
 		dataList.add(new Data("Rair", 287, "기체상수 ( = 0.287kJ/(Kg K) = 287 (J/kg K)"));
 	
-		dataList.add(new Data("P_Pst_3", 1188.58975305652, "피스톤엔진 연소실 연소후 초기압력(SRE과 동일양의 연료 분사 가정)"));
+		//공연비 계산
+		dataList.add(new Data("Mair", 0, "압축기 흡입공기 질량 (= (P_1*10^4*V_1/10^6)/(Rair*T_1)) kg/rev   "));
+		dataList.add(new Data("Mair_atk", 0, "Air Tank 공기량 = P_atkp*10^4*V_atk/10^6/(Rair*T_atkp)"));
+		dataList.add(new Data(1,"Q_hv", 44000, "연료 heat value ( = 44,000 kJ/kg)"));
+		dataList.add(new Data(1,"C_v", 0.718, "공기 정적비열 ( = 0.718 kj/(kg K))"));
+		dataList.add(new Data("C_v1", 0, "T_1 ~ T_2 구간에서 공기정적비열 평균 =AVERAGE(기체상수!AA4:AA10) => constant로 가정"));
+		dataList.add(new Data("C_v2", 0, "T_2 ~ T_3 구간에서 공기정적비열 평균 =AVERAGE(기체상수!AA8:AA28) => constant로 가정"));
+		dataList.add(new Data("C_v3", 0, "배기기가스 에서 Cv=AVERAGE(기체상수!AA10:AA15) => constant로 가정"));
+		dataList.add(new Data("Mfuel", 0, "T_3를 만족하기 위한 연료량 ( = Mair*C_v2*(T_3-T_2)/(Q_hv*Efcomb)  kg/rev"));
+		dataList.add(new Data("AF", 0, "air to fuel ratio ( = Mair/Mfuel)"));
+		dataList.add(new Data("Q_sec", 0, "시간(초)당 연료에너지 input ( = Mfuel*Q_hv*rpm_1/60 kJ/sec)"));
+		dataList.add(new Data("Q_ps", 0, "연료에너지 환산 마력 ( = Q_sec*1000*0.0013596 ps)"));
 		
 		
+		//1) Piston 엔진, 동일 CR 및 ER, Mfuel 분사, 마찰손실, 열손실 미반영γ , Cv값 등은 고정값 적용.
+		dataList.add(new Data(2, "P_Pt_2", 2, "피스톤엔진 Cr 압축비로 압축시 압력"));
+		dataList.add(new Data(2, "T_Pt_2", 2, "피스톤엔진 Cr 압축비로 압축시 온도"));
+		dataList.add(new Data(2, "T_Pt_3", 2, "피스톤엔진 연소실 온도(SRE과 동일양의 연료 분사 가정)"));
+		dataList.add(new Data(2, "P_Pt_3", 2, "피스톤엔진 연소실 연소후 초기압력(SRE과 동일양의 연료 분사 가정)"));
+		dataList.add(new Data(2, "P_Pt_4", 2, "CR로 팽창후 연소가스 압력"));
+		dataList.add(new Data(2, "T_Pt_4", 2, "CR로 팽창후 연소가스 온도"));
+		dataList.add(new Data(2, "P_Pt_4oe", 2, "ER로 팽창후 연소가스 압력"));
+		dataList.add(new Data(2, "T_Pt_4oe", 2, "ER로 팽창후 연소가스 온도"));
+		dataList.add(new Data(2, "P_Pt_5", 2, " ! 1회 iteration 수행, 배기 후 엔진에 남아있는 배기가스와 흡입공기의 혼합기 온도 및 압력 계산"));
+		dataList.add(new Data(2, "T_Pt_5", 2, "iteration 배기가스 배출 후 연소실 온도(연소가스가 대기압으로 팽창한 후 온도 K) =T_Pst_4*(P_Pst_5/P_Pst_4)^((γ_gasavr-1)/γ_gasavr) "));
+		dataList.add(new Data(2, "Mair_Pt", 2, "압축기 흡입공기 질량 = (P_1*10^4*V_1m2/10^6)/(Rair*T_1) + P_5*10^4*V_5/10^6/(Rair*T_Pst_5) kg/rev"));
+		dataList.add(new Data(2, "P_Pt_5oe", 2, ""));
+		dataList.add(new Data(2, "T_Pt_5oe", 2, "배기가스 배출 후 연소실 온도(연소가스가 대기압으로 팽창한 후 온도 K) =T_Pst_4*(P_Pst_5/P_Pst_4)^((γ_gasavr-1)/γ_gasavr) "));
+		dataList.add(new Data(2, "Mair_Pt_oe", 2, "압축기 흡입공기 질량 = (P_1*10^4*V_1m2/10^6)/(Rair*T_1) + P_5*10^4*V_5/10^6/(Rair_Pt_oe*T_5)"));
+		dataList.add(new Data(2, "P_Pt_15", 2, "흡입공기와 팽창 후 연소가스의 혼합 공기의 압력"));
+		dataList.add(new Data(2, "T_Pt_15", 2, "흡입공기와 팽창 후 연소가스의 혼합 공기의 온도 "));
+		dataList.add(new Data(2, "P_Pt_15oe", 2, "흡입공기와 팽창 후 연소가스의 혼합 공기의 압력"));
+		dataList.add(new Data(2, "T_Pt_15oe", 2, "흡입공기와 팽창 후 연소가스의 혼합 공기의 온도 "));
 		
+		//first iteration
+		dataList.add(new Data(2, "P_Pst_2", 2, "피스톤엔진 Cr 압축비로 압축시 압력"));
+		dataList.add(new Data(2, "T_Pst_2", 2, "피스톤엔진 Cr 압축비로 압축시 온도"));
+		dataList.add(new Data(2, "P_Pst_2oe", 2, "피스톤엔진 Er 압축비로 압축시 압력"));
+		dataList.add(new Data(2, "T_Pst_2oe", 2, "피스톤엔진 Er 압축비로 압축시 온도"));
+		dataList.add(new Data(2, "T_Pst_3", 2, "피스톤엔진 연소실 온도(SRE과 동일양의 연료 분사 가정)"));
+		dataList.add(new Data(2, "P_Pst_3", 2, "피스톤엔진 연소실 연소후 초기압력(SRE과 동일양의 연료 분사 가정)"));
+		dataList.add(new Data(2, "T_Pst_3oe", 2, "피스톤엔진 연소실 온도(SRE과 동일양의 연료 분사 가정)"));
+		dataList.add(new Data(2, "P_Pst_3oe", 2, "피스톤엔진 연소실 연소후 초기압력(SRE과 동일양의 연료 분사 가정)"));
+		dataList.add(new Data(2, "P_Pst_4", 2, "CR로 팽창후 연소가스 압력"));
+		dataList.add(new Data(2, "T_Pst_4", 2, "CR로 팽창후 연소가스 온도"));
+		dataList.add(new Data(2, "P_Pst_4oe", 2, "ER로 팽창후 연소가스 압력"));
+		dataList.add(new Data(2, "T_Pst_4oe", 2, "ER로 팽창후 연소가스 온도"));
+		dataList.add(new Data(2, "T_Pst_5", 2, "배기가스 배출 후 연소실 온도(연소가스가 대기압으로 팽창한 후 온도 K) =T_Pst_4*(P_5/P_Pst_4)^((γ_gasavr-1)/γ_gasavr) "));
+		dataList.add(new Data(2, "Mair_Pst", 2, "압축기 흡입공기 질량 (= (P_1*10^4*V_1/10^6)/(Rair*T_1)) kg/rev   "));
+		dataList.add(new Data(2, "T_Pst_5oe", 2, "배기가스 배출 후 연소실 온도(연소가스가 대기압으로 팽창한 후 온도 K) =T_4*(P_5/P_4)^((γ_gasavr-1)/γ_gasavr) "));
+		dataList.add(new Data(2, "Mair_Pst_oe", 2, "압축기 흡입공기 질량 (= (P_1*10^4*V_1/10^6)/(Rair*T_1)) kg/rev   "));
+		
+		//end of iteration
+		dataList.add(new Data(2, "η_pst_th", 2, "열효율 ( = 1 - 1/CR^(γ_airavr-1))   !  일반 피스톤엔진(ER=CR) 이론 열효율"));
+		dataList.add(new Data(2, "η_pst_th2", 2, "'= 1*Efcomb - Mair_Pst* (C_v3*T_Pst_4 - C_v*T_1)/(Mfuel*Q_hv)           "));
+		dataList.add(new Data(2, "η_pst_At", 2, "열효율 ( = 1-γ_airavr*(ER-CR)/(ER^γ_airavr-CR^γ_airavr)) : 동일 ER에서의 피스톤엔진 Atkinson Cycle 효율 "));
+		dataList.add(new Data(2, "η_pst_oe", 2, "열효율(= 1*Efcomb - Mair_Pst_oe* (C_v2*T_Pst_4oe - C_v*T_1)/(Mfuel*Q_hv)) : Piston engine over expanded cycle 열 효율, "));
+		dataList.add(new Data(2, "Ps_Pst_th", 2, "' = Q_ps*η_pst_th1"));
+		dataList.add(new Data(2, "Ps_Pst_At", 2, "' = Q_ps*η_pst_At"));
+		
+		//2) ER효과 반영, 마찰손실, 열손실 미반영, γ , Cv 값은 온도구간 평균값 적용.
+		//dataList.add(new Data(3, "", Double.MAX_VALUE, "dd"));
+		dataList.add(new Data(3, "2)η_SRE_1", 3, "열효율 ( = 1*Efcomb - (Mair* (C_v3*(W612+273) - C_v*T_1)+Mair_atk*(C_v1*(T_2-T_atk)))/(Mfuel*Q_hv))"));
+		dataList.add(new Data(3, "2)Ps_SRE_1", 3, "' = Q_ps*B138"));
+		dataList.add(new Data(3, "2)η_SRE_2", 3, "η_analysis = 1/2*Irotor*(ω2^2 - ω1^2))/(Mfuel*Q_hv*1000)  "));
+		dataList.add(new Data(3, "2)Ps_SRE_2", 3, "출력 = 1/2*Irotor*(Z612^2 - Z72^2)/(60/rpm_1)*0.0013596"));
+		
+
+		//3) ER 효과, 마찰손실 반영, 열손실 미반영, γ , Cv 값은 온도구간 평균값 적용.		dataList.add(new Data(5, "η_SRE_1", 0, "열효율 ( = 1*Efcomb - (Mair* (C_v3*(W612+273) - C_v*T_1)+Mair_atk*(C_v1*(T_2-T_atk)))/(Mfuel*Q_hv))"));
+		dataList.add(new Data(3, "3)η_SRE_1", 3, "'=B148/B141*B140  마찰에 의한 손실은 'η_SRE_2'에서 확인한 비율로 계산"));
+		dataList.add(new Data(3, "3)Ps_SRE_1", 3, "'=Q_ps*B149"));
+		dataList.add(new Data(3, "3)η_SRE_2", 3, "η_analysis = 1/2*Irotor*(ω2^2 - ω1^2))/(Mfuel*Q_hv*1000)"));
+		dataList.add(new Data(3, "3)Ps_SRE_2", 3, "출력 = 1/2*Irotor*(AC520^2 - AC251^2)/(60/rpm_1)*0.0013596"));
+
+ 
+		//4) ER 효과, 마찰손실, 열손실 반영, γ , Cv 값은 온도구간 평균값 적용
+		dataList.add(new Data(3, "4)η_SRE_1", 3, "열손실은 전체 열량의"));
+		dataList.add(new Data(3, "4)Ps_SRE_1", 3, "'=Q_ps*B154"));
+		dataList.add(new Data(3, "4)sfc_SRE_1", 3, "'=Mfuel/0.4536*rpm_1*60/B156"));
+		dataList.add(new Data(3, "4)η_SRE_2", 3, "열손실은 전체 열량의"));
+		dataList.add(new Data(3, "4)Ps_SRE_2", 3, "'=Q_ps*B155"));
+		dataList.add(new Data(3, "4)sfc_SRE_2", 3, "'=Mfuel/0.4536*rpm_1*60/B158"));
 	}
 
 } 

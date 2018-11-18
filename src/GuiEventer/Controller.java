@@ -1,5 +1,6 @@
 package GuiEventer;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -106,7 +107,7 @@ public class Controller implements Initializable {
 	
 	@FXML	private TableColumn<ResultData, Double> result18Column1;
 	@FXML	private TableColumn<ResultData, Double> result19Column1;
-	@FXML	private TableColumn<ResultData, Double> result20Column1;
+	@FXML	private TableColumn<ResultData, Double> result20Column1; 
 	@FXML	private TableColumn<ResultData, Double> result21Column1;
 	@FXML	private TableColumn<ResultData, Double> result22Column1;
 	@FXML	private TableColumn<ResultData, Double> result23Column1;
@@ -116,6 +117,9 @@ public class Controller implements Initializable {
 	
 	@FXML	public Text calculatingNotice;	ObservableList<Data> oDataList = FXCollections.observableArrayList();
 	ObservableList<ResultData> oResultDataList = FXCollections.observableArrayList();
+	
+
+	@FXML	private ImageView explain_image; 
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -290,6 +294,12 @@ public class Controller implements Initializable {
 		resultTableView2.setItems(oResultDataList);
 
 
+
+		//explain tab image setting
+		File file = new File("/img/explain.jpg"); 
+	    Image image = new Image(file.toURI().toString());
+	    explain_image = new ImageView(image);
+		
 		onDraw();
 	}
 	

@@ -1,6 +1,6 @@
 
-/*그래프에서 사용하는 디자인*/
-.chart-series-line {    
+/*그래프에서 사용하는 디자인*/ 
+.chart-series-line { 
     -fx-stroke-width : 2px;
     -fx-effect : null;
 } 
@@ -10,10 +10,10 @@
 .default-color3.chart-series-line {-fx-stroke : #FF0000; -fx-stroke-dash-array: 2 7 7 2;}
 
 .default-color4.chart-series-line {-fx-stroke : #007D00; }
-.default-color5.chart-series-line {-fx-stroke : #007D00; }
-.default-color6.chart-series-line {-fx-stroke : #FF0000; -fx-stroke-dash-array: 2 7 7 2;}
+.default-color5.chart-series-line {-fx-stroke : #FF0000; -fx-stroke-dash-array: 2 7 7 2;}
+.default-color6.chart-series-line {-fx-stroke : #007D00; }
 .default-color7.chart-series-line {-fx-stroke : #FF0000; -fx-stroke-dash-array: 2 7 7 2;}
-
+ 
 
 
 /*화면 분할 창 두께 조절*/
