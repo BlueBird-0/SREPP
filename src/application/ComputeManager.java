@@ -72,35 +72,35 @@ public class ComputeManager {
 			//반올림 계산
 			//DataManager.setData("P_3",Math.round(DataManager.g("P_3")/FileSystem.tolerance)*FileSystem.tolerance);
 		//1.4
-		DataManager.setData("γ_gasavr", 1.4);
-		//=T_3*(1/ER)^(γ_gasavr-1)
-		DataManager.setData("T_4", DataManager.g("T_3")*Math.pow((1/DataManager.g("ER")),(DataManager.g("γ_gasavr")-1)));
-		//= P_3*(1/ER)^γ_gasavr
-		DataManager.setData("P_4", DataManager.g("P_3")*Math.pow((1/DataManager.g("ER")),DataManager.g("γ_gasavr")));
+		DataManager.setData("gamma_gasavr", 1.4);
+		//=T_3*(1/ER)^(gamma_gasavr-1)
+		DataManager.setData("T_4", DataManager.g("T_3")*Math.pow((1/DataManager.g("ER")),(DataManager.g("gamma_gasavr")-1)));
+		//= P_3*(1/ER)^gamma_gasavr
+		DataManager.setData("P_4", DataManager.g("P_3")*Math.pow((1/DataManager.g("ER")),DataManager.g("gamma_gasavr")));
 		//=W612+273
 		DataManager.setData("T_4excel", 0);
 		//=V612
 		DataManager.setData("P_4excel", 0);
-		//=T_4*(P_5/P_4)^((γ_gasavr-1)/γ_gasavr)
-		DataManager.setData("T_5", DataManager.g("T_4")*Math.pow((DataManager.g("P_5")/DataManager.g("P_4")),((DataManager.g("γ_gasavr")-1)/DataManager.g("γ_gasavr"))));
+		//=T_4*(P_5/P_4)^((gamma_gasavr-1)/gamma_gasavr)
+		DataManager.setData("T_5", DataManager.g("T_4")*Math.pow((DataManager.g("P_5")/DataManager.g("P_4")),((DataManager.g("gamma_gasavr")-1)/DataManager.g("gamma_gasavr"))));
 		//=V_atk+V_2
 		DataManager.setData("V_a5", DataManager.g("V_atk")+DataManager.g("V_2"));
 		//=T_atk*T_5*(P_atk*V_atk+P_5*V_5)/(P_atk*V_atk*T_5 + P_5*V_5*T_atk)
 		DataManager.setData("T_a5", DataManager.g("T_atk")*DataManager.g("T_5")*(DataManager.g("P_atk")*DataManager.g("V_atk")+DataManager.g("P_5")*DataManager.g("V_5"))/(DataManager.g("P_atk")*DataManager.g("V_atk")*DataManager.g("T_5")+ DataManager.g("P_5")*DataManager.g("V_5")*DataManager.g("T_atk")));
 		//=P_a5
 		DataManager.setData("P_12", DataManager.g("P_a5"));
-		//= T_1*(P_a5/P_1)^((γ_airavr-1)/γ_airavr)
-		DataManager.setData("T_12",  DataManager.g("T_1")*Math.pow((DataManager.g("P_a5")/DataManager.g("P_1")),((DataManager.g("γ_airavr")-1)/DataManager.g("γ_airavr"))));
-		//= V_1m2/((T_12/T_1)^(1/(γ_gasavr-1)))
-		DataManager.setData("V_12",  DataManager.g("V_1m2")/(Math.pow((DataManager.g("T_12")/DataManager.g("T_1")),(1/(DataManager.g("γ_gasavr")-1)))));
+		//= T_1*(P_a5/P_1)^((gamma_airavr-1)/gamma_airavr)
+		DataManager.setData("T_12",  DataManager.g("T_1")*Math.pow((DataManager.g("P_a5")/DataManager.g("P_1")),((DataManager.g("gamma_airavr")-1)/DataManager.g("gamma_airavr"))));
+		//= V_1m2/((T_12/T_1)^(1/(gamma_gasavr-1)))
+		DataManager.setData("V_12",  DataManager.g("V_1m2")/(Math.pow((DataManager.g("T_12")/DataManager.g("T_1")),(1/(DataManager.g("gamma_gasavr")-1)))));
 		//=T_12*T_a5*(P_12*V_12+P_a5*V_a5)/(P_12*V_12*T_a5 + P_a5*V_a5*T_12)
 		DataManager.setData("T_2a5", DataManager.g("T_12")*DataManager.g("T_a5")*(DataManager.g("P_12")*DataManager.g("V_12")+DataManager.g("P_a5")*DataManager.g("V_a5"))/(DataManager.g("P_12")*DataManager.g("V_12")*DataManager.g("T_a5")+ DataManager.g("P_a5")*DataManager.g("V_a5")*DataManager.g("T_12")));
 		//=P_a5
 		DataManager.setData("P_2a5", DataManager.g("P_a5"));
-		//=P_2a5*((V_12+V_atk+V_2)/(V_atk+V_2))^γ_airavr
-		DataManager.setData("P_atkp", DataManager.g("P_2a5")*Math.pow(((DataManager.g("V_12")+DataManager.g("V_atk")+DataManager.g("V_2"))/(DataManager.g("V_atk")+DataManager.g("V_2"))),DataManager.g("γ_airavr")));
-		//=T_2a5*((V_12+V_atk+V_2)/(V_atk+V_2))^(γ_airavr-1)
-		DataManager.setData("T_atkp", DataManager.g("T_2a5")*Math.pow(((DataManager.g("V_12")+DataManager.g("V_atk")+DataManager.g("V_2"))/(DataManager.g("V_atk")+DataManager.g("V_2"))),(DataManager.g("γ_airavr")-1)));
+		//=P_2a5*((V_12+V_atk+V_2)/(V_atk+V_2))^gamma_airavr
+		DataManager.setData("P_atkp", DataManager.g("P_2a5")*Math.pow(((DataManager.g("V_12")+DataManager.g("V_atk")+DataManager.g("V_2"))/(DataManager.g("V_atk")+DataManager.g("V_2"))),DataManager.g("gamma_airavr")));
+		//=T_2a5*((V_12+V_atk+V_2)/(V_atk+V_2))^(gamma_airavr-1)
+		DataManager.setData("T_atkp", DataManager.g("T_2a5")*Math.pow(((DataManager.g("V_12")+DataManager.g("V_atk")+DataManager.g("V_2"))/(DataManager.g("V_atk")+DataManager.g("V_2"))),(DataManager.g("gamma_airavr")-1)));
 
 		
 		pistonCompute();
@@ -116,14 +116,14 @@ public class ComputeManager {
 		DataManager.setData("Mair", (DataManager.g("P_1")*10000*DataManager.g("V_1m2")/1000000)/(DataManager.g("Rair")*DataManager.g("T_1")) + DataManager.g("P_5")*10000*DataManager.g("V_5")/1000000/(DataManager.g("Rair")*DataManager.g("T_5")));
 		//= P_atkp*10^4*V_atk/10^6/(Rair*T_atkp)
 		DataManager.setData("Mair_atk", DataManager.g("P_atkp")*10000*DataManager.g("V_atk")/1000000/(DataManager.g("Rair")*DataManager.g("T_atkp")));
-		//= C_v
-		DataManager.setData("C_v1",  DataManager.g("C_v"));
-		//= C_v
-		DataManager.setData("C_v2",  DataManager.g("C_v"));
-		//= C_v
-		DataManager.setData("C_v3",  DataManager.g("C_v"));
-		//=Mair*C_v2*(T_3-T_2)/(Q_hv*Efcomb)
-		DataManager.setData("Mfuel", DataManager.g("Mair")*DataManager.g("C_v2")*(DataManager.g("T_3")-DataManager.g("T_2"))/(DataManager.g("Q_hv")*DataManager.g("Efcomb")));
+		//= C_V
+		DataManager.setData("C_V1",  DataManager.g("C_V"));
+		//= C_V
+		DataManager.setData("C_V2",  DataManager.g("C_V"));
+		//= C_V
+		DataManager.setData("C_V3",  DataManager.g("C_V"));
+		//=Mair*C_V2*(T_3-T_2)/(Q_hv*Efcomb)
+		DataManager.setData("Mfuel", DataManager.g("Mair")*DataManager.g("C_V2")*(DataManager.g("T_3")-DataManager.g("T_2"))/(DataManager.g("Q_hv")*DataManager.g("Efcomb")));
 		//= Mair/Mfuel
 		DataManager.setData("AF",  DataManager.g("Mair")/DataManager.g("Mfuel"));
 		//= Mfuel*Q_hv*(rpm_1/60)
@@ -132,32 +132,32 @@ public class ComputeManager {
 		DataManager.setData("Q_ps", DataManager.g("Q_sec")*0001.3596);
 		
 		
-		//=P_1*CR^γ_airavr
-		DataManager.setData("P_Pt_2", DataManager.g("P_1")*Math.pow(DataManager.g("CR"), DataManager.g("γ_airavr")));
-		//=T_1*CR^(γ_airavr-1)
-		DataManager.setData("T_Pt_2", DataManager.g("T_1")*Math.pow(DataManager.g("CR"), (DataManager.g("γ_airavr")-1)));
-		//=Mfuel*Q_hv*Efcomb/(Mair*C_v3)+T_Pt_2
-		DataManager.setData("T_Pt_3", DataManager.g("Mfuel")*DataManager.g("Q_hv")*DataManager.g("Efcomb")/(DataManager.g("Mair")*DataManager.g("C_v3"))+DataManager.g("T_Pt_2"));
+		//=P_1*CR^gamma_airavr
+		DataManager.setData("P_Pt_2", DataManager.g("P_1")*Math.pow(DataManager.g("CR"), DataManager.g("gamma_airavr")));
+		//=T_1*CR^(gamma_airavr-1)
+		DataManager.setData("T_Pt_2", DataManager.g("T_1")*Math.pow(DataManager.g("CR"), (DataManager.g("gamma_airavr")-1)));
+		//=Mfuel*Q_hv*Efcomb/(Mair*C_V3)+T_Pt_2
+		DataManager.setData("T_Pt_3", DataManager.g("Mfuel")*DataManager.g("Q_hv")*DataManager.g("Efcomb")/(DataManager.g("Mair")*DataManager.g("C_V3"))+DataManager.g("T_Pt_2"));
 		//=P_Pt_2*T_Pt_3/T_Pt_2
 		DataManager.setData("P_Pt_3", DataManager.g("P_Pt_2")*DataManager.g("T_Pt_3")/DataManager.g("T_Pt_2"));
-		//= P_Pt_3*(1/CR)^γ_gasavr
-		DataManager.setData("P_Pt_4", DataManager.g("P_Pt_3")*Math.pow((1/DataManager.g("CR")),DataManager.g("γ_gasavr")));
-		//=T_Pt_3*(1/CR)^(γ_gasavr-1)
-		DataManager.setData("T_Pt_4", DataManager.g("T_Pt_3")*Math.pow((1/DataManager.g("CR")),(DataManager.g("γ_gasavr")-1)));
-		//= P_Pt_3*(1/ER)^γ_gasavr
-		DataManager.setData("P_Pt_4oe", DataManager.g("P_Pt_3")*Math.pow((1/DataManager.g("ER")), DataManager.g("γ_gasavr")));
-		//=T_Pt_3*(1/ER)^(γ_gasavr-1)
-		DataManager.setData("T_Pt_4oe", DataManager.g("T_Pt_3")*Math.pow((1/DataManager.g("ER")),(DataManager.g("γ_gasavr")-1)));
+		//= P_Pt_3*(1/CR)^gamma_gasavr
+		DataManager.setData("P_Pt_4", DataManager.g("P_Pt_3")*Math.pow((1/DataManager.g("CR")),DataManager.g("gamma_gasavr")));
+		//=T_Pt_3*(1/CR)^(gamma_gasavr-1)
+		DataManager.setData("T_Pt_4", DataManager.g("T_Pt_3")*Math.pow((1/DataManager.g("CR")),(DataManager.g("gamma_gasavr")-1)));
+		//= P_Pt_3*(1/ER)^gamma_gasavr
+		DataManager.setData("P_Pt_4oe", DataManager.g("P_Pt_3")*Math.pow((1/DataManager.g("ER")), DataManager.g("gamma_gasavr")));
+		//=T_Pt_3*(1/ER)^(gamma_gasavr-1)
+		DataManager.setData("T_Pt_4oe", DataManager.g("T_Pt_3")*Math.pow((1/DataManager.g("ER")),(DataManager.g("gamma_gasavr")-1)));
 		//= P_1
 		DataManager.setData("P_Pt_5",  DataManager.g("P_1"));
-		//=T_Pt_4*(P_Pt_5/P_Pt_4)^((γ_gasavr-1)/γ_gasavr)
-		DataManager.setData("T_Pt_5", DataManager.g("T_Pt_4")*Math.pow((DataManager.g("P_Pt_5")/DataManager.g("P_Pt_4")),((DataManager.g("γ_gasavr")-1)/DataManager.g("γ_gasavr"))));
+		//=T_Pt_4*(P_Pt_5/P_Pt_4)^((gamma_gasavr-1)/gamma_gasavr)
+		DataManager.setData("T_Pt_5", DataManager.g("T_Pt_4")*Math.pow((DataManager.g("P_Pt_5")/DataManager.g("P_Pt_4")),((DataManager.g("gamma_gasavr")-1)/DataManager.g("gamma_gasavr"))));
 		//= (P_1*10^4*V_1m2/10^6)/(Rair*T_1) + P_5*10^4*V_5/10^6/(Rair*T_Pt_5)
 		DataManager.setData("Mair_Pt", (DataManager.g("P_1")*Math.pow(10,4)*DataManager.g("V_1m2")/Math.pow(10,6))/(DataManager.g("Rair")*DataManager.g("T_1")) + DataManager.g("P_5")*Math.pow(10,4)*DataManager.g("V_5")/Math.pow(10,6)/(DataManager.g("Rair")*DataManager.g("T_Pt_5")));
 		//= P_1
 		DataManager.setData("P_Pt_5oe", DataManager.g("P_1"));
-		//=T_Pt_4oe*(P_Pt_5oe/P_Pt_4oe)^((γ_gasavr-1)/γ_gasavr)
-		DataManager.setData("T_Pt_5oe", DataManager.g("T_Pt_4oe")*Math.pow((DataManager.g("P_Pt_5oe")/DataManager.g("P_Pt_4oe")), ((DataManager.g("γ_gasavr")-1)/DataManager.g("γ_gasavr"))));
+		//=T_Pt_4oe*(P_Pt_5oe/P_Pt_4oe)^((gamma_gasavr-1)/gamma_gasavr)
+		DataManager.setData("T_Pt_5oe", DataManager.g("T_Pt_4oe")*Math.pow((DataManager.g("P_Pt_5oe")/DataManager.g("P_Pt_4oe")), ((DataManager.g("gamma_gasavr")-1)/DataManager.g("gamma_gasavr"))));
 		//= (P_1*10^4*V_1m2/10^6)/(Rair*T_1) + P_5*10^4*V_5/10^6/(Rair*T_Pt_5oe)
 		DataManager.setData("Mair_Pt_oe", (DataManager.g("P_1")*Math.pow(10,4)*DataManager.g("V_1m2")/Math.pow(10,6))/(DataManager.g("Rair")*DataManager.g("T_1")) + DataManager.g("P_5")*Math.pow(10,4)*DataManager.g("V_5")/Math.pow(10,6)/(DataManager.g("Rair")*DataManager.g("T_Pt_5oe")));
 		//= P_1
@@ -170,83 +170,83 @@ public class ComputeManager {
 		DataManager.setData("T_Pt_15oe", DataManager.g("T_1")*DataManager.g("T_Pt_5oe")*(DataManager.g("P_1")*DataManager.g("V_1m2")+DataManager.g("P_Pt_5oe")*DataManager.g("V_2"))/(DataManager.g("P_1")*DataManager.g("V_1m2")*DataManager.g("T_Pt_5oe")+ DataManager.g("P_Pt_5oe")*DataManager.g("V_2")*DataManager.g("T_1")));
 		
 		
-		//=P_Pt_15*CR^γ_airavr
-		DataManager.setData("P_Pst_2", DataManager.g("P_Pt_15")*Math.pow(DataManager.g("CR"),DataManager.g("γ_airavr")));
-		//=T_Pt_15*CR^(γ_airavr-1)
-		DataManager.setData("T_Pst_2", DataManager.g("T_Pt_15")*Math.pow(DataManager.g("CR"),(DataManager.g("γ_airavr")-1)));
-		//=P_Pt_15oe*CR^γ_airavr
-		DataManager.setData("P_Pst_2oe", DataManager.g("P_Pt_15oe")*Math.pow(DataManager.g("CR"),DataManager.g("γ_airavr")));
-		//=T_Pt_15oe*CR^(γ_airavr-1)
-		DataManager.setData("T_Pst_2oe", DataManager.g("T_Pt_15oe")*Math.pow(DataManager.g("CR"),(DataManager.g("γ_airavr")-1)));
-		//=Mfuel*Q_hv*Efcomb/(Mair_Pt*C_v3)+T_Pst_2
-		DataManager.setData("T_Pst_3", DataManager.g("Mfuel")*DataManager.g("Q_hv")*DataManager.g("Efcomb")/(DataManager.g("Mair_Pt")*DataManager.g("C_v3"))+DataManager.g("T_Pst_2"));	
+		//=P_Pt_15*CR^gamma_airavr
+		DataManager.setData("P_Pst_2", DataManager.g("P_Pt_15")*Math.pow(DataManager.g("CR"),DataManager.g("gamma_airavr")));
+		//=T_Pt_15*CR^(gamma_airavr-1)
+		DataManager.setData("T_Pst_2", DataManager.g("T_Pt_15")*Math.pow(DataManager.g("CR"),(DataManager.g("gamma_airavr")-1)));
+		//=P_Pt_15oe*CR^gamma_airavr
+		DataManager.setData("P_Pst_2oe", DataManager.g("P_Pt_15oe")*Math.pow(DataManager.g("CR"),DataManager.g("gamma_airavr")));
+		//=T_Pt_15oe*CR^(gamma_airavr-1)
+		DataManager.setData("T_Pst_2oe", DataManager.g("T_Pt_15oe")*Math.pow(DataManager.g("CR"),(DataManager.g("gamma_airavr")-1)));
+		//=Mfuel*Q_hv*Efcomb/(Mair_Pt*C_V3)+T_Pst_2
+		DataManager.setData("T_Pst_3", DataManager.g("Mfuel")*DataManager.g("Q_hv")*DataManager.g("Efcomb")/(DataManager.g("Mair_Pt")*DataManager.g("C_V3"))+DataManager.g("T_Pst_2"));	
 		//=P_Pst_2*T_Pst_3/T_Pst_2	
 		DataManager.setData("P_Pst_3", DataManager.g("P_Pst_2")*DataManager.g("T_Pst_3")/DataManager.g("T_Pst_2"));
 		System.out.println("dasdadmasd"+ DataManager.g("P_Pst_3"));
-		//=Mfuel*Q_hv*Efcomb/(Mair_Pt_oe*C_v)+T_Pst_2oe
-		DataManager.setData("T_Pst_3oe", DataManager.g("Mfuel")*DataManager.g("Q_hv")*DataManager.g("Efcomb")/(DataManager.g("Mair_Pt_oe")*DataManager.g("C_v"))+DataManager.g("T_Pst_2oe"));
+		//=Mfuel*Q_hv*Efcomb/(Mair_Pt_oe*C_V)+T_Pst_2oe
+		DataManager.setData("T_Pst_3oe", DataManager.g("Mfuel")*DataManager.g("Q_hv")*DataManager.g("Efcomb")/(DataManager.g("Mair_Pt_oe")*DataManager.g("C_V"))+DataManager.g("T_Pst_2oe"));
 		//=P_Pst_2oe*T_Pst_3oe/T_Pst_2oe
 		DataManager.setData("P_Pst_3oe", DataManager.g("P_Pst_2oe")*DataManager.g("T_Pst_3oe")/DataManager.g("T_Pst_2oe"));
-		//= P_Pst_3*(1/CR)^γ_gasavr
-		DataManager.setData("P_Pst_4", DataManager.g("P_Pst_3")*Math.pow((1/DataManager.g("CR")), DataManager.g("γ_gasavr")));
-		//=T_Pst_3*(1/CR)^(γ_gasavr-1)
-		DataManager.setData("T_Pst_4", DataManager.g("T_Pst_3")*Math.pow((1/DataManager.g("CR")), (DataManager.g("γ_gasavr")-1)));
-		//= P_Pst_3oe*(1/ER)^γ_gasavr
-		DataManager.setData("P_Pst_4oe", DataManager.g("P_Pst_3oe")*Math.pow((1/DataManager.g("ER")),DataManager.g("γ_gasavr")));
-		//=T_Pst_3oe*(1/ER)^(γ_gasavr-1)
-		DataManager.setData("T_Pst_4oe", DataManager.g("T_Pst_3oe")*Math.pow((1/DataManager.g("ER")),(DataManager.g("γ_gasavr")-1)));
-		//=T_Pst_4*(P_5/P_Pst_4)^((γ_gasavr-1)/γ_gasavr)
-		DataManager.setData("T_Pst_5", DataManager.g("T_Pst_4")*Math.pow((DataManager.g("P_5")/DataManager.g("P_Pst_4")),((DataManager.g("γ_gasavr")-1)/DataManager.g("γ_gasavr"))));
+		//= P_Pst_3*(1/CR)^gamma_gasavr
+		DataManager.setData("P_Pst_4", DataManager.g("P_Pst_3")*Math.pow((1/DataManager.g("CR")), DataManager.g("gamma_gasavr")));
+		//=T_Pst_3*(1/CR)^(gamma_gasavr-1)
+		DataManager.setData("T_Pst_4", DataManager.g("T_Pst_3")*Math.pow((1/DataManager.g("CR")), (DataManager.g("gamma_gasavr")-1)));
+		//= P_Pst_3oe*(1/ER)^gamma_gasavr
+		DataManager.setData("P_Pst_4oe", DataManager.g("P_Pst_3oe")*Math.pow((1/DataManager.g("ER")),DataManager.g("gamma_gasavr")));
+		//=T_Pst_3oe*(1/ER)^(gamma_gasavr-1)
+		DataManager.setData("T_Pst_4oe", DataManager.g("T_Pst_3oe")*Math.pow((1/DataManager.g("ER")),(DataManager.g("gamma_gasavr")-1)));
+		//=T_Pst_4*(P_5/P_Pst_4)^((gamma_gasavr-1)/gamma_gasavr)
+		DataManager.setData("T_Pst_5", DataManager.g("T_Pst_4")*Math.pow((DataManager.g("P_5")/DataManager.g("P_Pst_4")),((DataManager.g("gamma_gasavr")-1)/DataManager.g("gamma_gasavr"))));
 		//= (P_1*10^4*V_1m2/10^6)/(Rair*T_1) + P_5*10^4*V_5/10^6/(Rair*T_Pst_5)
 		DataManager.setData("Mair_Pst", (DataManager.g("P_1")*Math.pow(10,4)*DataManager.g("V_1m2")/Math.pow(10,6))/(DataManager.g("Rair")*DataManager.g("T_1")) + DataManager.g("P_5")*Math.pow(10,4)*DataManager.g("V_5")/Math.pow(10,6)/(DataManager.g("Rair")*DataManager.g("T_Pst_5")));
-		//=T_Pst_4oe*(P_5/P_Pst_4oe)^((γ_gasavr-1)/γ_gasavr)
-		DataManager.setData("T_Pst_5oe", DataManager.g("T_Pst_4oe")*Math.pow((DataManager.g("P_5")/DataManager.g("P_Pst_4oe")),((DataManager.g("γ_gasavr")-1)/DataManager.g("γ_gasavr"))));
+		//=T_Pst_4oe*(P_5/P_Pst_4oe)^((gamma_gasavr-1)/gamma_gasavr)
+		DataManager.setData("T_Pst_5oe", DataManager.g("T_Pst_4oe")*Math.pow((DataManager.g("P_5")/DataManager.g("P_Pst_4oe")),((DataManager.g("gamma_gasavr")-1)/DataManager.g("gamma_gasavr"))));
 		//= (P_1*10^4*V_1m2/10^6)/(Rair*T_1) + P_5*10^4*V_5/10^6/(Rair*T_Pst_5oe)
 		DataManager.setData("Mair_Pst_oe",(DataManager.g("P_1")*Math.pow(10,4)*DataManager.g("V_1m2")/Math.pow(10,6))/(DataManager.g("Rair")*DataManager.g("T_1")) + DataManager.g("P_5")*Math.pow(10,4)*DataManager.g("V_5")/Math.pow(10,6)/(DataManager.g("Rair")*DataManager.g("T_Pst_5oe")));
 		
-		//= 1 - 1/CR^(γ_airavr-1)
-		DataManager.setData("η_pst_th",1 - 1/Math.pow(DataManager.g("CR"),(DataManager.g("γ_airavr")-1)));
-		//= 1*Efcomb - Mair_Pst* (C_v3*T_Pst_4 - C_v*T_1)/(Mfuel*Q_hv)
-		DataManager.setData("η_pst_th2",1*DataManager.g("Efcomb") - DataManager.g("Mair_Pst")* (DataManager.g("C_v3")*DataManager.g("T_Pst_4") - DataManager.g("C_v")*DataManager.g("T_1"))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")));
-		//=IF(ER=CR, η_pst_th, 1-γ_airavr*(ER-CR)/(ER^γ_airavr-CR^γ_airavr))
+		//= 1 - 1/CR^(gamma_airavr-1)
+		DataManager.setData("eta_pst_th",1 - 1/Math.pow(DataManager.g("CR"),(DataManager.g("gamma_airavr")-1)));
+		//= 1*Efcomb - Mair_Pst* (C_V3*T_Pst_4 - C_V*T_1)/(Mfuel*Q_hv)
+		DataManager.setData("eta_pst_th2",1*DataManager.g("Efcomb") - DataManager.g("Mair_Pst")* (DataManager.g("C_V3")*DataManager.g("T_Pst_4") - DataManager.g("C_V")*DataManager.g("T_1"))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")));
+		//=IF(ER=CR, eta_pst_th, 1-gamma_airavr*(ER-CR)/(ER^gamma_airavr-CR^gamma_airavr))
 		if(DataManager.g("ER") == DataManager.g("CR"))
-			DataManager.setData("η_pst_At", DataManager.g("η_pst_th"));
+			DataManager.setData("eta_pst_At", DataManager.g("eta_pst_th"));
 		else
-			DataManager.setData("η_pst_At", 1-DataManager.g("γ_airavr")*(DataManager.g("ER")-DataManager.g("CR"))/(Math.pow(DataManager.g("ER"),DataManager.g("γ_airavr"))-Math.pow(DataManager.g("CR"),DataManager.g("γ_airavr"))));
-		//= 1*Efcomb - Mair_Pst_oe* (C_v3*T_Pst_4oe - C_v*T_1)/(Mfuel*Q_hv)
-		DataManager.setData("η_pst_oe",1*DataManager.g("Efcomb")- DataManager.g("Mair_Pst_oe")* (DataManager.g("C_v3")*DataManager.g("T_Pst_4oe") - DataManager.g("C_v")*DataManager.g("T_1"))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")));
-		//= Q_ps*η_pst_th
-		DataManager.setData("Ps_Pst_th",DataManager.g("Q_ps")*DataManager.g("η_pst_th"));
-		//=Q_ps*η_pst_At
-		DataManager.setData("Ps_Pst_At",DataManager.g("Q_ps")*DataManager.g("η_pst_At"));
+			DataManager.setData("eta_pst_At", 1-DataManager.g("gamma_airavr")*(DataManager.g("ER")-DataManager.g("CR"))/(Math.pow(DataManager.g("ER"),DataManager.g("gamma_airavr"))-Math.pow(DataManager.g("CR"),DataManager.g("gamma_airavr"))));
+		//= 1*Efcomb - Mair_Pst_oe* (C_V3*T_Pst_4oe - C_V*T_1)/(Mfuel*Q_hv)
+		DataManager.setData("eta_pst_oe",1*DataManager.g("Efcomb")- DataManager.g("Mair_Pst_oe")* (DataManager.g("C_V3")*DataManager.g("T_Pst_4oe") - DataManager.g("C_V")*DataManager.g("T_1"))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")));
+		//= Q_ps*eta_pst_th
+		DataManager.setData("Ps_Pst_th",DataManager.g("Q_ps")*DataManager.g("eta_pst_th"));
+		//=Q_ps*eta_pst_At
+		DataManager.setData("Ps_Pst_At",DataManager.g("Q_ps")*DataManager.g("eta_pst_At"));
 	}
 	
 	public static void sreCompute() {
-		//2) ER효과 반영, 마찰손실, 열손실 미반영, γ , Cv 값은 온도구간 평균값 적용.
-		//= 1*Efcomb - (Mair* (C_v3*(W612+273) - C_v*T_1)+Mair_atk*(C_v1*(T_2-T_atk)))/(Mfuel*Q_hv)
-		DataManager.setData("2)η_SRE_1",1*DataManager.g("Efcomb") - (DataManager.g("Mair")* (DataManager.g("C_v3")*(		DataManager.resultDataList.get(540).g(9)+273) - DataManager.g("C_v")*DataManager.g("T_1"))+DataManager.g("Mair_atk")*(DataManager.g("C_v1")*(DataManager.g("T_2")-DataManager.g("T_atk"))))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")));
+		//2) ER효과 반영, 마찰손실, 열손실 미반영, gamma , Cv 값은 온도구간 평균값 적용.
+		//= 1*Efcomb - (Mair* (C_V3*(W612+273) - C_V*T_1)+Mair_atk*(C_V1*(T_2-T_atk)))/(Mfuel*Q_hv)
+		DataManager.setData("2)eta_SRE_1",1*DataManager.g("Efcomb") - (DataManager.g("Mair")* (DataManager.g("C_V3")*(		DataManager.resultDataList.get(540).g(9)+273) - DataManager.g("C_V")*DataManager.g("T_1"))+DataManager.g("Mair_atk")*(DataManager.g("C_V1")*(DataManager.g("T_2")-DataManager.g("T_atk"))))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")));
 		//=Q_ps*B179
-		DataManager.setData("2)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("2)η_SRE_1"));
+		DataManager.setData("2)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("2)eta_SRE_1"));
 		//= 1/2*Irotor*(Z612^2 - Z72^2)/(Mfuel*Q_hv*1000)
-		DataManager.setData("2)η_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(12),2) - Math.pow(DataManager.resultDataList.get(0).g(12),2))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")*1000));
+		DataManager.setData("2)eta_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(12),2) - Math.pow(DataManager.resultDataList.get(0).g(12),2))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")*1000));
 		//= 1/2*Irotor*(Z612^2 - Z72^2)/(60/rpm_1)*0.0013596
 		DataManager.setData("2)Ps_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(12),2) - Math.pow(DataManager.resultDataList.get(0).g(12),2))/(60/DataManager.g("rpm_1"))*0.0013596);
 		
-		//3) ER 효과, 마찰손실 반영, 열손실 미반영, γ , Cv 값은 온도구간 평균값 적용.
+		//3) ER 효과, 마찰손실 반영, 열손실 미반영, gamma , Cv 값은 온도구간 평균값 적용.
 		//= 1/2*Irotor*(AG612^2 - AG72^2)/(Mfuel*Q_hv*1000)
-		DataManager.setData("3)η_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(19),2) - Math.pow(DataManager.resultDataList.get(0).g(19),2))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")*1000));
+		DataManager.setData("3)eta_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(19),2) - Math.pow(DataManager.resultDataList.get(0).g(19),2))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")*1000));
 		//= 1/2*Irotor*(AG612^2 - AG72^2)/(60/rpm_1)*0.0013596
 		DataManager.setData("3)Ps_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(19),2) - Math.pow(DataManager.resultDataList.get(0).g(19),2))/(60/DataManager.g("rpm_1"))*0.0013596);
 		//=B188/B181*B179
-		DataManager.setData("3)η_SRE_1",DataManager.g("3)η_SRE_2")/DataManager.g("2)η_SRE_2")*DataManager.g("2)η_SRE_1"));
+		DataManager.setData("3)eta_SRE_1",DataManager.g("3)eta_SRE_2")/DataManager.g("2)eta_SRE_2")*DataManager.g("2)eta_SRE_1"));
 		//=Q_ps*B186
-		DataManager.setData("3)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("3)η_SRE_1"));
+		DataManager.setData("3)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("3)eta_SRE_1"));
 		
-		//4) ER 효과, 마찰손실, 열손실 반영, γ , Cv 값은 온도구간 평균값 적용
+		//4) ER 효과, 마찰손실, 열손실 반영, gamma , Cv 값은 온도구간 평균값 적용
 		//=B186-Qloss
-		DataManager.setData("4)η_SRE_1",DataManager.g("3)η_SRE_1")-DataManager.g("Qloss"));
+		DataManager.setData("4)eta_SRE_1",DataManager.g("3)eta_SRE_1")-DataManager.g("Qloss"));
 		//=Q_ps*B193
-		DataManager.setData("4)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("4)η_SRE_1"));
+		DataManager.setData("4)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("4)eta_SRE_1"));
 		//=Mfuel/0.4536*rpm_1*60/B194
 		DataManager.setData("4)sfc_SRE_1",DataManager.g("Mfuel")/0.4536*DataManager.g("rpm_1")*60/DataManager.g("4)Ps_SRE_1"));
 		
@@ -255,20 +255,26 @@ public class ComputeManager {
 		System.out.println("---"+ Math.pow(DataManager.resultDataList.get(540).g(12),2));
 		System.out.println("---"+ Math.pow(DataManager.resultDataList.get(0).g(12),2));
 		System.out.println("---"+(DataManager.g("Mfuel")*DataManager.g("Q_hv")));		//=B188-Qloss
-		DataManager.setData("4)η_SRE_2",DataManager.g("3)η_SRE_2")-DataManager.g("Qloss"));
+		DataManager.setData("4)eta_SRE_2",DataManager.g("3)eta_SRE_2")-DataManager.g("Qloss"));
 		//=Q_ps*B196
-		DataManager.setData("4)Ps_SRE_2",DataManager.g("Q_ps")*DataManager.g("4)η_SRE_2"));
+		DataManager.setData("4)Ps_SRE_2",DataManager.g("Q_ps")*DataManager.g("4)eta_SRE_2"));
 		//=Mfuel/0.4536*rpm_1*60/B197
 		DataManager.setData("4)sfc_SRE_2",DataManager.g("Mfuel")/0.4536*DataManager.g("rpm_1")*60/DataManager.g("4)Ps_SRE_2"));
+		
+		
+		//그래프를 이용한 효율 계산
+		DataManager.setData("효율", (141.355*100000*43.25/1000000)/(DataManager.g("Q_hv")*DataManager.g("Mfuel")*1000));
+		DataManager.setData("일", 141.355*100000*43.25/1000000);
+		DataManager.setData("열량", DataManager.g("Q_hv")*DataManager.g("Mfuel")*1000);
 	}
 	//압력계산
 	public static void pressCompute()
 	{
 		CalculatingStatus = true;
 		//P_2 임의값 가정
-		DataManager.setData("P_2", 100);
+//		DataManager.setData("P_2", 100);
 		//4. PRDopen = 270으로 설정
-		DataManager.setData("PRDopen", 270);
+//		DataManager.setData("PRDopen", 270);
 		
 		int i=0;
 		while(true)
@@ -282,7 +288,8 @@ public class ComputeManager {
 				//=S612+273
 				DataManager.setData("T_c_excel", DataManager.resultDataList.get(DataManager.resultDataList.size()-1).g(5)+273);
 			LogManager.println("__________"+"압력계산 "+i+"번째"+"__________");
-			LogManager.println("PRDopen:"+DataManager.g("PRDopen") + "\t\t" + "P_a5:"+DataManager.g("P_a5") +"\t\t" + "P_2:"+DataManager.g("P_2") +"\t\t" + "P_c_excel:"+DataManager.g("P_c_excel"));
+			
+			LogManager.println("P_a5:"+DataManager.g("P_a5")+"\t\t"+"PRDopen:"+DataManager.g("PRDopen") +"\t\t" + "P_2:"+DataManager.g("P_2") +"\t\t" + "P_c_excel:"+DataManager.g("P_c_excel"));
 			   
 			//TODO test용 코드
 			if(i==100)
@@ -306,7 +313,7 @@ public class ComputeManager {
 	{	
 		LogManager.println("__________"+"온도 계산"+"__________");
 		//7. T_2 가정
-		DataManager.setData("T_2", 900);
+//		DataManager.setData("T_2", 900);
 		while(true)
 		{
 			initCompute();

@@ -120,6 +120,7 @@ public class Controller implements Initializable {
 	
 
 	@FXML	private ImageView explain_image; 
+	private int menuState = 1; 
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -275,10 +276,47 @@ public class Controller implements Initializable {
 		output2List[5].setCellValueFactory(cellData -> Bindings.format("%.4f", cellData.getValue().getValue(22)));
 		output2List[6].setCellValueFactory(cellData -> Bindings.format("%.4f", cellData.getValue().getValue(23)));		
 		
-		//처음 변수창 출력
-		oDataList.clear();	
-		for(Data data : DataManager.getChangeableList())
-			oDataList.add(data);
+		//MenuButton이용
+		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				oDataList.clear();	
+				for(Data data : DataManager.getChangeableList())
+					oDataList.add(data);		
+			}
+		});
+		menuItem2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				oDataList.clear();	
+				for(Data data : DataManager.getProperties())
+					oDataList.add(data);		
+			}
+		});
+		menuItem3.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				oDataList.clear();	
+				for(Data data : DataManager.getPistonEngineList())
+					oDataList.add(data);		
+			}
+		});
+		menuItem4.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				oDataList.clear();	
+				for(Data data : DataManager.getSreEngineList())
+					oDataList.add(data);		
+			}
+		});
+		menuItem5.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				oDataList.clear();	
+				for(Data data : DataManager.getAllList())
+					oDataList.add(data);		
+			}
+		});
 		
 		//처음 결과창 출력
 		for (ResultData data : DataManager.resultDataList) {
@@ -384,47 +422,24 @@ public class Controller implements Initializable {
 
 	public void onDraw()
 	{
-		//MenuButton이용
-		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				oDataList.clear();	
+		oDataList.clear();	
+		switch(menuState) {
+			case 1:
 				for(Data data : DataManager.getChangeableList())
-					oDataList.add(data);		
-			}
-		});
-		menuItem2.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				oDataList.clear();	
+					oDataList.add(data);
+			case 2:
 				for(Data data : DataManager.getProperties())
-					oDataList.add(data);		
-			}
-		});
-		menuItem3.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				oDataList.clear();	
+					oDataList.add(data);	
+			case 3:
 				for(Data data : DataManager.getPistonEngineList())
-					oDataList.add(data);		
-			}
-		});
-		menuItem4.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				oDataList.clear();	
+					oDataList.add(data);	
+			case 4:
 				for(Data data : DataManager.getSreEngineList())
-					oDataList.add(data);		
-			}
-		});
-		menuItem5.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				oDataList.clear();	
+					oDataList.add(data);	
+			case 5:
 				for(Data data : DataManager.getAllList())
 					oDataList.add(data);		
-			}
-		});
+		}
 		
 		//계산후 결과 리스트 다시보여주기
 		oResultDataList.clear();

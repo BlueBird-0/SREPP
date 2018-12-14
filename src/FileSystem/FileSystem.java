@@ -27,7 +27,7 @@ public class FileSystem {
 	public static String saveDirectory = "";
 	
 	public static void setDirectory()
-	{
+	{ 
 		saveDirectory = System.getProperty("user.dir")+"\\save";
 	}
 	

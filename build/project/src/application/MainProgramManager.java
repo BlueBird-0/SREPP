@@ -1,5 +1,6 @@
 package application;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,7 @@ public class MainProgramManager extends Application {
 	private BorderPane rootLayout;
 	
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws UnsupportedEncodingException {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("SREPP");
 			

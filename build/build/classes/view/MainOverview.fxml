@@ -13,8 +13,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -65,14 +63,14 @@
 	                                             <columns>
 	                                                <TableColumn fx:id="result02Column" prefWidth="75.0" text="v_c" />
 	                                                <TableColumn fx:id="result03Column" prefWidth="75.0" text="volcomex" />
-	                                                <TableColumn fx:id="result04Column" prefWidth="75.0" text="γ_air" />
+	                                                <TableColumn fx:id="result04Column" prefWidth="75.0" text="gamma_air" />
 	                                                <TableColumn fx:id="result05Column" prefWidth="83.0" text="p_c(N/cm^2)" />
 	                                                <TableColumn fx:id="result06Column" prefWidth="67.0" text="t_c, (C )" />
 	                                             </columns></TableColumn>
 	                                          <TableColumn prefWidth="75.0" text="팽창기">
 	                                             <columns>
 	                                                <TableColumn fx:id="result07Column" prefWidth="75.0" text="v_e" />
-	                                                <TableColumn fx:id="result08Column" prefWidth="62.0" text="γ_gas" />
+	                                                <TableColumn fx:id="result08Column" prefWidth="62.0" text="gamma_gas" />
 	                                                <TableColumn fx:id="result09Column" prefWidth="88.0" text="p_e(N/cm^2)" />
 	                                                <TableColumn fx:id="result10Column" prefWidth="75.0" text="t_e (C )" />
 	                                             </columns></TableColumn>
@@ -82,8 +80,8 @@
 	                                             </columns></TableColumn>
 	                                          <TableColumn prefWidth="75.0" text="Roter 운동">
 	                                             <columns>
-	                                                <TableColumn fx:id="result12Column" prefWidth="75.0" text="α" />
-	                                                <TableColumn fx:id="result13Column" prefWidth="75.0" text="ω" />
+	                                                <TableColumn fx:id="result12Column" prefWidth="75.0" text="alpha" />
+	                                                <TableColumn fx:id="result13Column" prefWidth="75.0" text="omega" />
 	                                                <TableColumn fx:id="result14Column" prefWidth="75.0" text="a(rad)" />
 	                                                <TableColumn fx:id="result15Column" prefWidth="75.0" text="a(degree)" />
 	                                                <TableColumn fx:id="result16Column" prefWidth="75.0" text="rpm" />
@@ -98,8 +96,8 @@
 	                                             </columns></TableColumn>
 	                                          <TableColumn prefWidth="75.0" text="Rotor 운동(펌프일, 마찰력 반영)">
 	                                             <columns>
-	                                                <TableColumn fx:id="result19Column" prefWidth="75.0" text="α" />
-	                                                <TableColumn fx:id="result20Column" prefWidth="75.0" text="ω" />
+	                                                <TableColumn fx:id="result19Column" prefWidth="75.0" text="alpha" />
+	                                                <TableColumn fx:id="result20Column" prefWidth="75.0" text="omega" />
 	                                                <TableColumn fx:id="result21Column" prefWidth="75.0" text="a(rad)" />
 	                                                <TableColumn fx:id="result22Column" prefWidth="75.0" text="a(degree)" />
 	                                                <TableColumn fx:id="result23Column" prefWidth="75.0" text="rpm" />
@@ -136,8 +134,8 @@
                                           </TableColumn>
                                           <TableColumn prefWidth="75.0" text="Roter 운동">
                                              <columns>
-                                                <TableColumn fx:id="result12Column1" prefWidth="75.0" text="α" />
-                                                <TableColumn fx:id="result13Column1" prefWidth="75.0" text="ω" />
+                                                <TableColumn fx:id="result12Column1" prefWidth="75.0" text="alpha" />
+                                                <TableColumn fx:id="result13Column1" prefWidth="75.0" text="omega" />
                                                 <TableColumn fx:id="result14Column1" prefWidth="75.0" text="a(rad)" />
                                                 <TableColumn fx:id="result15Column1" prefWidth="75.0" text="a(degree)" />
                                                 <TableColumn fx:id="result16Column1" prefWidth="75.0" text="rpm" />
@@ -166,8 +164,8 @@
                                           </TableColumn>
                                           <TableColumn prefWidth="75.0" text="Rotor 운동(펌프일, 마찰력 반영)">
                                              <columns>
-                                                <TableColumn fx:id="result19Column1" prefWidth="75.0" text="α" />
-                                                <TableColumn fx:id="result20Column1" prefWidth="75.0" text="ω" />
+                                                <TableColumn fx:id="result19Column1" prefWidth="75.0" text="alpha" />
+                                                <TableColumn fx:id="result20Column1" prefWidth="75.0" text="omega" />
                                                 <TableColumn fx:id="result21Column1" prefWidth="75.0" text="a(rad)" />
                                                 <TableColumn fx:id="result22Column1" prefWidth="75.0" text="a(degree)" />
                                                 <TableColumn fx:id="result23Column1" prefWidth="75.0" text="rpm" />
@@ -183,19 +181,6 @@
                                  </children></AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Explain">
-                           <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="explain_image" fitHeight="593.0" fitWidth="820.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
-                                       <image>
-                                          <Image url="@../img/explain.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                        </Tab>
                     </tabs>
                   </TabPane>
                   <Button layoutX="699.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBtnGraph" prefHeight="23.0" prefWidth="119.0" text="Graph" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
@@ -207,10 +192,10 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuOpen" text="Open" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuSave" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuSave" text="Save" visible="false" />
                   <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuSaveAs" text="Save As..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuProperties" text="Properties" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuProperties" text="Properties" visible="false" />
                   <MenuItem mnemonicParsing="false" onAction="#handleBtnMenuExit" text="Exit" />
             </items>
           </Menu>
