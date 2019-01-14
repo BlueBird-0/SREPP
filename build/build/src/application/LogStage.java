@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class LogStage extends Stage{
 	
 	public LogStage() {
-		 
 		this.setTitle("Calculation Process");
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainProgramManager.class.getResource("/view/LogView.fxml"));

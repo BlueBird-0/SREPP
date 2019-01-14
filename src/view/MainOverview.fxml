@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
@@ -36,13 +37,15 @@
                   <TextField layoutX="20.0" layoutY="48.0" text="search" visible="false" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
                   <MenuButton layoutX="295.0" layoutY="10.0" mnemonicParsing="false" text="Show" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                     <items>
-                      <MenuItem fx:id="menuItem1" mnemonicParsing="false" text="Changeable" />
-                        <MenuItem fx:id="menuItem2" mnemonicParsing="false" text="Properties" />
-                        <MenuItem fx:id="menuItem3" mnemonicParsing="false" text="Piston Engine" />
-                        <MenuItem fx:id="menuItem4" mnemonicParsing="false" text="SRE Engine" />
-                      <MenuItem fx:id="menuItem5" mnemonicParsing="false" text="All" />
+                        <MenuItem fx:id="menuItem6" mnemonicParsing="false" text="All" />
+                      <MenuItem fx:id="menuItem1" mnemonicParsing="false" text="형상 변수" />
+                        <MenuItem fx:id="menuItem2" mnemonicParsing="false" text="엔진 운용조건 변수" />
+                        <MenuItem fx:id="menuItem3" mnemonicParsing="false" text="대기 조건" />
+                        <MenuItem fx:id="menuItem4" mnemonicParsing="false" text="특성 값" />
+                      <MenuItem fx:id="menuItem5" mnemonicParsing="false" text="가정 값" />
                     </items>
                   </MenuButton>
+                  <CheckBox fx:id="changeAble" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" text="ChangeAble" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="660.0" prefWidth="457.0">

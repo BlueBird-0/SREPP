@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.sun.jdi.event.Event;
 
 import DataManager.Data;
 import DataManager.DataManager;
@@ -97,7 +96,7 @@ public class Controller implements Initializable {
 	@FXML	private TableColumn<ResultData, Double> result31Column;
 	
 	/*output1*/
-	@FXML	private TableColumn<ResultData, Double> result11Column1;
+	@FXML	private TableColumn<ResultData, Double> result11Column1; 
 	@FXML	private TableColumn<ResultData, Double> result12Column1;
 	@FXML	private TableColumn<ResultData, Double> result13Column1;
 	@FXML	private TableColumn<ResultData, Double> result14Column1;
@@ -113,15 +112,18 @@ public class Controller implements Initializable {
 	@FXML	private TableColumn<ResultData, Double> result23Column1;
 	@FXML	private TableColumn<ResultData, Double> result24Column1;
 	
-	@FXML	public MenuItem menuItem1, menuItem2,menuItem3,menuItem4,menuItem5;
+	@FXML	public MenuItem menuItem1, menuItem2,menuItem3,menuItem4,menuItem5,menuItem6;
+	
+	@FXML	public CheckBox changeAble;
 	
 	@FXML	public Text calculatingNotice;	ObservableList<Data> oDataList = FXCollections.observableArrayList();
 	ObservableList<ResultData> oResultDataList = FXCollections.observableArrayList();
 	
 
-	@FXML	private ImageView explain_image; 
-	private int menuState = 1; 
-
+	@FXML	private ImageView explain_image;  
+	private int menuState = Data.STATE_All; 
+	boolean changeAble_isChecked;
+  
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -166,7 +168,7 @@ public class Controller implements Initializable {
 						BooleanProperty comment = new SimpleBooleanProperty(false);
  
 						if(empty != true) {
-							if(row.state != Data.STATE_CHANGEABLE)
+							if(row.changeAble != true)
 								selected = new SimpleBooleanProperty(true);
 							if(row.value.getValue() == Double.MAX_VALUE) {
 								comment = new SimpleBooleanProperty(true);
@@ -270,58 +272,72 @@ public class Controller implements Initializable {
 		
 		output2List[0].setCellValueFactory(cellData -> Bindings.format("%.3E", cellData.getValue().getValue(17)));
 		output2List[1].setCellValueFactory(cellData -> Bindings.format("%.0f", cellData.getValue().getValue(18)));
-		output2List[2].setCellValueFactory(cellData -> Bindings.format("%.3f", cellData.getValue().getValue(19)));
+
 		output2List[3].setCellValueFactory(cellData -> Bindings.format("%.5f", cellData.getValue().getValue(20)));
 		output2List[4].setCellValueFactory(cellData -> Bindings.format("%.4f", cellData.getValue().getValue(21)));
 		output2List[5].setCellValueFactory(cellData -> Bindings.format("%.4f", cellData.getValue().getValue(22)));
 		output2List[6].setCellValueFactory(cellData -> Bindings.format("%.4f", cellData.getValue().getValue(23)));		
 		
+		
+		
+		
+		//ChangeAble Check State
+		changeAble.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			 public void changed(ObservableValue<? extends Boolean> ov,
+		             Boolean old_val, Boolean new_val) {
+		             changeAble_isChecked = changeAble.isSelected();
+		             onDraw();
+		          }
+		});
+				
 		//MenuButton이용
 		menuItem1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				oDataList.clear();	
-				for(Data data : DataManager.getChangeableList())
-					oDataList.add(data);		
+				menuState = Data.STATE_ZERO;
+				onDraw();
 			}
 		});
 		menuItem2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				oDataList.clear();	
-				for(Data data : DataManager.getProperties())
-					oDataList.add(data);		
+				menuState = Data.STATE_ONE;
+				onDraw();
 			}
 		});
 		menuItem3.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				oDataList.clear();	
-				for(Data data : DataManager.getPistonEngineList())
-					oDataList.add(data);		
+				menuState = Data.STATE_TWO;				
+				onDraw();
 			}
 		});
 		menuItem4.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				oDataList.clear();	
-				for(Data data : DataManager.getSreEngineList())
-					oDataList.add(data);		
+				menuState = Data.STATE_THREE;
+				onDraw();
 			}
 		});
 		menuItem5.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
-			public void handle(ActionEvent event) {
-				oDataList.clear();	
-				for(Data data : DataManager.getAllList())
-					oDataList.add(data);		
+			public void handle(ActionEvent event) {			
+				menuState = Data.STATE_FOUR;
+				onDraw();	
 			}
 		});
-		
+		menuItem6.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				menuState = Data.STATE_All;
+				onDraw();	
+			}
+		});
+
 		//처음 결과창 출력
-		for (ResultData data : DataManager.resultDataList) {
-			oResultDataList.add(data);
-		}
+	//	for (ResultData data : DataManager.resultDataList) {
+	//		oResultDataList.add(data);
+	//	}
 		
 		
 		
@@ -421,24 +437,71 @@ public class Controller implements Initializable {
 	//그래픽 처리 함수
 
 	public void onDraw()
-	{
-		oDataList.clear();	
+	{		             changeAble_isChecked = changeAble.isSelected();
+
+		oDataList.clear();
 		switch(menuState) {
-			case 1:
-				for(Data data : DataManager.getChangeableList())
-					oDataList.add(data);
-			case 2:
-				for(Data data : DataManager.getProperties())
-					oDataList.add(data);	
-			case 3:
-				for(Data data : DataManager.getPistonEngineList())
-					oDataList.add(data);	
-			case 4:
-				for(Data data : DataManager.getSreEngineList())
-					oDataList.add(data);	
-			case 5:
+			case Data.STATE_ZERO:
+				for(Data data : DataManager.getList_0())
+				{
+					if(changeAble_isChecked == true)
+					{
+						if(data.changeAble == true)
+							oDataList.add(data);
+					}else
+						oDataList.add(data);
+				}
+				break;
+			case Data.STATE_ONE:
+				for(Data data : DataManager.getList_1())
+				{
+					if(changeAble_isChecked == true)
+					{
+						if(data.changeAble == true)
+							oDataList.add(data);
+					}else
+						oDataList.add(data);
+				}				break;
+			case Data.STATE_TWO:
+				for(Data data : DataManager.getList_2())
+				{
+					if(changeAble_isChecked == true)
+					{
+						if(data.changeAble == true)
+							oDataList.add(data);
+					}else
+						oDataList.add(data);
+				}				break;
+			case Data.STATE_THREE:
+				for(Data data : DataManager.getList_3())
+				{
+					if(changeAble_isChecked == true)
+					{
+						if(data.changeAble == true)
+							oDataList.add(data);
+					}else
+						oDataList.add(data);
+				}				break;
+			case Data.STATE_FOUR:
+				for(Data data : DataManager.getList_4())
+				{
+					if(changeAble_isChecked == true)
+					{
+						if(data.changeAble == true)
+							oDataList.add(data);
+					}else
+						oDataList.add(data);
+				}				break;
+			case Data.STATE_All:
 				for(Data data : DataManager.getAllList())
-					oDataList.add(data);		
+				{
+					if(changeAble_isChecked == true)
+					{
+						if(data.changeAble == true)
+							oDataList.add(data);
+					}else
+						oDataList.add(data);
+				}				break;
 		}
 		
 		//계산후 결과 리스트 다시보여주기

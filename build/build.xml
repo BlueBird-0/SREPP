@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<project name="SRE" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<project name="SREPP" default="do-deploy" basedir="."  xmlns:fx="javafx:com.sun.javafx.tools.ant">
 	<target name="init-fx-tasks">
 		<path id="fxant">
 			<filelist>
 				<file name="${java.home}\lib\ant-javafx.jar"/>
 				<file name="${java.home}\lib\jfxrt.jar"/>
-			    <file name="${basedir}"/>
+				<file name="${basedir}"/>
 			</filelist>
 		</path>
 	
@@ -20,10 +20,15 @@
 	
 		<mkdir dir="externalLibs" />
 	
+		<copy todir="externalLibs">
+			<fileset dir="C:\Program Files\Java">
+				<filename name="jdk1.8.0_191"/>
+			</fileset>
+		</copy>
 	
 		<mkdir dir="project" />
 		<copy todir="project">
-			<fileset dir="C:\Users\wku\eclipse-workspace\SRE">
+			<fileset dir="C:\Users\ij351\Desktop\SREPP">
 				<include name="src/**" />
 			</fileset>
 		</copy>
@@ -39,6 +44,7 @@
 		<!-- Copy project-libs references -->
 		<copy todir="build/libs">
 			<fileset dir="externalLibs">
+				<include name="jdk1.8.0_191"/>
 			</fileset>
 		</copy>
 	
@@ -51,7 +57,7 @@
 			</fileset>
 		</copy>
 	
-		<javac includeantruntime="false" source="10" target="10" srcdir="build/src" destdir="build/classes" encoding="MS949">
+		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="build/src" destdir="build/classes" encoding="MS949">
 			<classpath>
 				<fileset dir="build/libs">
 					<include name="*"/>
@@ -83,22 +89,21 @@
 	
 	
 		<fx:resources id="appRes">
-			<fx:fileset dir="dist" includes="SRE.jar"/>
+			<fx:fileset dir="dist" includes="SREPP.jar"/>
 			<fx:fileset dir="dist" includes="libs/*"/>
-		    <fx:fileset dir="dist" includes="resources/**"/>
+			<fx:fileset dir="dist" includes="resources/**"/>
 		</fx:resources>
 	
 		<fx:application id="fxApplication"
 			name="SREPP"
 			mainClass="application.MainProgramManager"
-		    version="1.0"
 		/>
 	
 		<mkdir dir="build/classes/META-INF" />
 	
 	
 	
-		<fx:jar destfile="dist/SRE.jar">
+		<fx:jar destfile="dist/SREPP.jar">
 			<fx:application refid="fxApplication"/>
 			<fileset dir="build/classes">
 			</fileset>
@@ -107,7 +112,7 @@
 			<manifest>
 				<attribute name="Implementation-Vendor" value="bluebird"/>
 				<attribute name="Implementation-Title" value="SREPP"/>
-				<attribute name="Implementation-Version" value="1.0"/>
+				<attribute name="Implementation-Version" value="1.1"/>
 				<attribute name="JavaFX-Feature-Proxy" value="None"/>
 			</manifest>
 		</fx:jar>
@@ -121,11 +126,11 @@
 			includeDT="false"
 			offlineAllowed="true"
 			outdir="${basedir}/deploy"
-			outfile="SRE" nativeBundles="exe"
+			outfile="SREPP" nativeBundles="exe"
 			updatemode="background" >
 	
-			<!--<fx:platform basedir="${java.home}"/>-->
-			<fx:info title="SRE" vendor="bluebird"/>
+			<fx:platform basedir="${java.home}"/>
+			<fx:info title="SREPP" vendor="bluebird"/>
 	
 			<fx:application refId="fxApplication"/>
 			<fx:resources refid="appRes"/>

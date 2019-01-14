@@ -1,5 +1,6 @@
 package application;
 
+import java.text.Format;
 import java.util.ArrayList;
 
 import DataManager.Data;
@@ -11,8 +12,6 @@ import LogManager.LogManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.oracle.tools.packager.Log;
-
 
 public class ComputeManager {
 	static double DIV360 = 0.0027777777777778;	// DIV360 =1/360값
@@ -23,6 +22,9 @@ public class ComputeManager {
 	public static void initCompute()
 	{
 		CalculatingStatus = true;
+		//dt = 60/(rpm*360*10)
+		DataManager.setData("dt", 60/(DataManager.g("rpm")*360*10));
+		
 		//= 0.5*(1.25*(rrotorc*1.2/100)^2 +1*(rrotore*1.2/100)^2)
 		DataManager.setData("Irotor", 0.5*( 1.25*Math.pow((DataManager.g("rrotorc")*1.2/100),2) +1*Math.pow((DataManager.g("rrotore")*1.2/100),2)));
 		//= (rrotorc+rhousing)/2/100
@@ -126,8 +128,8 @@ public class ComputeManager {
 		DataManager.setData("Mfuel", DataManager.g("Mair")*DataManager.g("C_V2")*(DataManager.g("T_3")-DataManager.g("T_2"))/(DataManager.g("Q_hv")*DataManager.g("Efcomb")));
 		//= Mair/Mfuel
 		DataManager.setData("AF",  DataManager.g("Mair")/DataManager.g("Mfuel"));
-		//= Mfuel*Q_hv*(rpm_1/60)
-		DataManager.setData("Q_sec", DataManager.g("Mfuel")*DataManager.g("Q_hv")*(DataManager.g("rpm_1")/60));
+		//= Mfuel*Q_hv*(rpm/60)
+		DataManager.setData("Q_sec", DataManager.g("Mfuel")*DataManager.g("Q_hv")*(DataManager.g("rpm")/60));
 		//= Q_sec*1000*0.0013596
 		DataManager.setData("Q_ps", DataManager.g("Q_sec")*0001.3596);
 		
@@ -229,14 +231,14 @@ public class ComputeManager {
 		DataManager.setData("2)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("2)eta_SRE_1"));
 		//= 1/2*Irotor*(Z612^2 - Z72^2)/(Mfuel*Q_hv*1000)
 		DataManager.setData("2)eta_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(12),2) - Math.pow(DataManager.resultDataList.get(0).g(12),2))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")*1000));
-		//= 1/2*Irotor*(Z612^2 - Z72^2)/(60/rpm_1)*0.0013596
-		DataManager.setData("2)Ps_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(12),2) - Math.pow(DataManager.resultDataList.get(0).g(12),2))/(60/DataManager.g("rpm_1"))*0.0013596);
+		//= 1/2*Irotor*(Z612^2 - Z72^2)/(60/rpm)*0.0013596
+		DataManager.setData("2)Ps_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(12),2) - Math.pow(DataManager.resultDataList.get(0).g(12),2))/(60/DataManager.g("rpm"))*0.0013596);
 		
 		//3) ER 효과, 마찰손실 반영, 열손실 미반영, gamma , Cv 값은 온도구간 평균값 적용.
 		//= 1/2*Irotor*(AG612^2 - AG72^2)/(Mfuel*Q_hv*1000)
 		DataManager.setData("3)eta_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(19),2) - Math.pow(DataManager.resultDataList.get(0).g(19),2))/(DataManager.g("Mfuel")*DataManager.g("Q_hv")*1000));
-		//= 1/2*Irotor*(AG612^2 - AG72^2)/(60/rpm_1)*0.0013596
-		DataManager.setData("3)Ps_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(19),2) - Math.pow(DataManager.resultDataList.get(0).g(19),2))/(60/DataManager.g("rpm_1"))*0.0013596);
+		//= 1/2*Irotor*(AG612^2 - AG72^2)/(60/rpm)*0.0013596
+		DataManager.setData("3)Ps_SRE_2", 0.5*DataManager.g("Irotor")*(Math.pow(DataManager.resultDataList.get(540).g(19),2) - Math.pow(DataManager.resultDataList.get(0).g(19),2))/(60/DataManager.g("rpm"))*0.0013596);
 		//=B188/B181*B179
 		DataManager.setData("3)eta_SRE_1",DataManager.g("3)eta_SRE_2")/DataManager.g("2)eta_SRE_2")*DataManager.g("2)eta_SRE_1"));
 		//=Q_ps*B186
@@ -247,8 +249,8 @@ public class ComputeManager {
 		DataManager.setData("4)eta_SRE_1",DataManager.g("3)eta_SRE_1")-DataManager.g("Qloss"));
 		//=Q_ps*B193
 		DataManager.setData("4)Ps_SRE_1",DataManager.g("Q_ps")*DataManager.g("4)eta_SRE_1"));
-		//=Mfuel/0.4536*rpm_1*60/B194
-		DataManager.setData("4)sfc_SRE_1",DataManager.g("Mfuel")/0.4536*DataManager.g("rpm_1")*60/DataManager.g("4)Ps_SRE_1"));
+		//=Mfuel/0.4536*rpm*60/B194
+		DataManager.setData("4)sfc_SRE_1",DataManager.g("Mfuel")/0.4536*DataManager.g("rpm")*60/DataManager.g("4)Ps_SRE_1"));
 		
 
 		System.out.println("---"+ DataManager.g("Qloss"));
@@ -258,8 +260,8 @@ public class ComputeManager {
 		DataManager.setData("4)eta_SRE_2",DataManager.g("3)eta_SRE_2")-DataManager.g("Qloss"));
 		//=Q_ps*B196
 		DataManager.setData("4)Ps_SRE_2",DataManager.g("Q_ps")*DataManager.g("4)eta_SRE_2"));
-		//=Mfuel/0.4536*rpm_1*60/B197
-		DataManager.setData("4)sfc_SRE_2",DataManager.g("Mfuel")/0.4536*DataManager.g("rpm_1")*60/DataManager.g("4)Ps_SRE_2"));
+		//=Mfuel/0.4536*rpm*60/B197
+		DataManager.setData("4)sfc_SRE_2",DataManager.g("Mfuel")/0.4536*DataManager.g("rpm")*60/DataManager.g("4)Ps_SRE_2"));
 		
 		
 		//그래프를 이용한 효율 계산
@@ -272,24 +274,30 @@ public class ComputeManager {
 	{
 		CalculatingStatus = true;
 		//P_2 임의값 가정
-//		DataManager.setData("P_2", 100);
+		DataManager.setData("P_2", DataManager.g("P_1")*Math.pow(DataManager.g("CR"),DataManager.g("gamma_airavr")));
 		//4. PRDopen = 270으로 설정
 //		DataManager.setData("PRDopen", 270);
 		
-		int i=0;
+		int i=1;
+		String P_2str;
+		LogManager.println("-----압력 계산-----"/*+i+"번째"*/);
+		LogManager.println("Calculation\tP_a5\t\t\t\t\tPRDopen\t\tP_2\t\t\t\t\tP_c_excel");
 		while(true)
 		{
 			initCompute();
 			//후 계산 Excel 테이블의 p_c 값이 P_a5가 되는 각도 확인하여 PRDopen으로 지정
 			DataManager.setData("PRDopen", nearSearch(DataManager.g("P_a5")));
+			
+			
 			initCompute();
 				//=R612
 				DataManager.setData("P_c_excel", DataManager.resultDataList.get(DataManager.resultDataList.size()-1).g(4));
 				//=S612+273
 				DataManager.setData("T_c_excel", DataManager.resultDataList.get(DataManager.resultDataList.size()-1).g(5)+273);
-			LogManager.println("__________"+"압력계산 "+i+"번째"+"__________");
+			//LogManager.println("-----"+"압력 계산-----"/*+i+"번째"*/);
 			
-			LogManager.println("P_a5:"+DataManager.g("P_a5")+"\t\t"+"PRDopen:"+DataManager.g("PRDopen") +"\t\t" + "P_2:"+DataManager.g("P_2") +"\t\t" + "P_c_excel:"+DataManager.g("P_c_excel"));
+			P_2str = String.valueOf(DataManager.g("P_2"));
+			LogManager.println("\t"+i+"\t\t"+DataManager.g("P_a5")+"\t"+DataManager.g("PRDopen") +"\t\t" +P_2str.substring(0,16) +"\t\t" +DataManager.g("P_c_excel"));
 			   
 			//TODO test용 코드
 			if(i==100)
@@ -297,12 +305,17 @@ public class ComputeManager {
 			i++;
 			//5. P_2 값이 excel로 계산한 압축기 압력 P_c_excel과 동일한지 점검,      동일하면 go to step 7
 			if(Math.abs(DataManager.g("P_2") - DataManager.g("P_c_excel")) < FileSystem.tolerance*0.1)
-			{
+			{  
 				break;
-			}
+			} 
 			//6. P_2 값을 P_c_excel 값으로 수정 후 go to step 4
 			DataManager.setData("P_2", DataManager.g("P_c_excel"));
 		}
+		//계산결과 출력
+		LogManager.println("----- 계산 결과 -----");
+		LogManager.println("P_2 : "+P_2str.substring(0,16) +"\t\t"+"P_c_excel : " +DataManager.g("P_c_excel"));
+		LogManager.println("");
+		
 		//반올림 계산
 		DataManager.setData("P_2",Math.round(DataManager.g("P_2")/FileSystem.tolerance)*FileSystem.tolerance);
 		//go to step 7
@@ -311,27 +324,39 @@ public class ComputeManager {
 	
 	public static void temperatureCompute()
 	{	
-		LogManager.println("__________"+"온도 계산"+"__________");
-		//7. T_2 가정
-//		DataManager.setData("T_2", 900);
+		LogManager.println("----- 온도 계산 -----");
+		//7. T_2 가정		
+		DataManager.setData("T_2", DataManager.g("T_1")*Math.pow(DataManager.g("CR"),(DataManager.g("gamma_airavr")-1)));
+		
+		LogManager.println("\t\t\t"+"Input Data"+"\t\t\t\t"+"Output Data");
+		int i=1;
+		String T_2str;
 		while(true)
 		{
+			if(i%5==1)
+				LogManager.println("Calculation"+"\t"+"T_2"+"\t\t\t\t\t\t"+"T_atkp");
 			initCompute();
+
+			T_2str = String.valueOf(DataManager.g("T_2"));
+			LogManager.println("\t"+i+"\t\t"+T_2str.substring(0,16)+"\t\t"+DataManager.g("T_atkp"));
+
 			//8. T_2 값이 T_atkp와 동일한지 확인,     동일하면 계산 종료
-			if(Math.abs(DataManager.g("T_2") - DataManager.g("T_atkp")) < FileSystem.tolerance*0.1)
+			if((DataManager.g("T_2") - DataManager.g("T_atkp"))/DataManager.g("T_atkp") <= FileSystem.tolerance*0.1)
 				break;
-			LogManager.println("T_2:"+DataManager.g("T_2")+"\t\tT_atkp:"+DataManager.g("T_atkp"));
 			//9. T_2 값을 T_atkp 값으로 수정 후 go to step 8
 			DataManager.setData("T_2", DataManager.g("T_atkp"));
+			i++;
 		}
+		//계산결과 출력
+		LogManager.println("----- 계산 결과-----");
+		LogManager.println("T_2 : "+T_2str.substring(0,16) +"\t\t"+"T_atkp : " +DataManager.g("T_atkp"));
+		LogManager.println("");
+		
 		//반올림 계산
 		DataManager.setData("T_2",Math.round(DataManager.g("T_2")/FileSystem.tolerance)*FileSystem.tolerance);
 		initCompute();
 
 		CalculatingStatus = false;
-		LogManager.println("__________계산끝__________");
-		LogManager.println("");
-		LogManager.println("");
 	}
 
 	static ArrayList<Double> p_cList = new ArrayList<>();
@@ -394,18 +419,18 @@ public class ComputeManager {
 		pData.setValue(9, DataManager.g("T_3")-273);
 		pData.setValue(10, 0);
 		pData.setValue(11, 0);
-		pData.setValue(12, DataManager.g("rpm_1")/60*2*Math.PI);
+		pData.setValue(12, DataManager.g("rpm")/60*2*Math.PI);
 		pData.setValue(13, 0);
 		pData.setValue(14, 0);
 		pData.setValue(15, pData.g(12)/2/Math.PI*60);
-//		pData.setValue(16, 1/2*Irotor*(Z612^2 - Z72^2)/(60/rpm_1)*0.0013596);
+//		pData.setValue(16, 1/2*Irotor*(Z612^2 - Z72^2)/(60/rpm)*0.0013596);
 		pData.setValue(17, 0);
 		pData.setValue(18, 0);
-		pData.setValue(19, DataManager.g("rpm_1")/60*2*Math.PI);
+		pData.setValue(19, DataManager.g("rpm")/60*2*Math.PI);
 		pData.setValue(20, 0);
 		pData.setValue(21, 0);
 		pData.setValue(22, pData.g(19)/2/Math.PI*60);
-//		pData.setValue(23, 1/2*Irotor*(AG612^2 - AG72^2)/(60/rpm_1)*0.0013596);
+//		pData.setValue(23, 1/2*Irotor*(AG612^2 - AG72^2)/(60/rpm)*0.0013596);
 		pData.setValue(24, 270);
 		pData.setValue(25, (DataManager.g("CR")+1)-(DataManager.g("V_1")-pData.g(1))/DataManager.g("V_2"));
 		pData.setValue(26, pData.g(6)/DataManager.g("V_2"));
